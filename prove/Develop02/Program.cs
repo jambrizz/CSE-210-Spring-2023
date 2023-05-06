@@ -45,7 +45,8 @@ class Program
             {
                 case 1:
                     Console.WriteLine();
-                    Console.WriteLine("Journal Entry:");
+                    PromptHandler promptHandler = new PromptHandler();
+                    promptHandler.LoadPrompt();
                     break;
                 case 2:
                     Console.WriteLine();
