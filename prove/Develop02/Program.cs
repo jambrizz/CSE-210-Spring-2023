@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-class Program
+public class Program
 {
+    
     static void Main(string[] args)
     {
+        List<string> _entries = new List<string>();
         bool runProgram = true;
         do
         {
+            Journal journal = new Journal();
             Console.WriteLine();
             Console.WriteLine("Welcome to your Journal App!");
             Console.WriteLine("Please select an option:");
@@ -18,7 +21,7 @@ class Program
             Console.WriteLine("3. Load Entries");
             Console.WriteLine("4. Save Entries");
             Console.WriteLine("5. Quit");
-            Console.WriteLine("What would you like to do?");
+            Console.Write("What would you like to do? ");
             string userChoice = Console.ReadLine();
 
             bool userChoiceBool = int.TryParse(userChoice, out int FeatureChoice);
@@ -34,7 +37,7 @@ class Program
                 Console.WriteLine("3. Load Entries");
                 Console.WriteLine("4. Save Entries");
                 Console.WriteLine("5. Quit");
-                Console.WriteLine("What would you like to do?");
+                Console.Write("What would you like to do? ");
                 userChoice = Console.ReadLine();
 
                 userChoiceBool = int.TryParse(userChoice, out FeatureChoice);
@@ -45,12 +48,11 @@ class Program
             {
                 case 1:
                     Console.WriteLine();
-                    PromptHandler promptHandler = new PromptHandler();
-                    promptHandler.LoadPrompt();
+                    _entries.Add(journal.AddEntry());
                     break;
                 case 2:
                     Console.WriteLine();
-                    Console.WriteLine("Display Entries:");
+                    journal.DisplayJournal(_entries);
                     break;
                 case 3:
                     Console.WriteLine();

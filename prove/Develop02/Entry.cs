@@ -11,8 +11,15 @@ public class Entry
 
     public string _response;
 
-    public void DisplayEntry()
+    public void SetEntry(string prompt, string response)
     {
-        
+        _date = DateTime.Now.ToString("MM/dd/yyyy");
+        _prompt = prompt;
+        _response = response;
+    }
+
+    public string DisplayEntry()
+    {
+        return $"Date: {_date} - Prompt: {_prompt} \n{_response}";
     }
 }

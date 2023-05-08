@@ -20,8 +20,7 @@ public class PromptHandler
         "Did you learn anything new today?",
     };
 
-    private List<int> questionsUsed = new List<int>();
-
+    
     public int GetRandomPrompt()
     {
         Random number = new Random();
@@ -29,36 +28,15 @@ public class PromptHandler
         return randomNumber;
     }
 
-    public bool CheckIfPromptUsed(int number)
+    public string GetPrompt()
     {
-        if (questionsUsed.Contains(number))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        int randomNumber = GetRandomPrompt();
+        string prompt = questions[randomNumber];
+        return _prompt = prompt;
     }
 
-    //TODO fix the method below the questionUsed is not saving the number after it is used and always returns 0 regardless of the number of questions used
-    //Move the questionsUsed list to the Program.cs file as a posible solution
-    public void LoadPrompt()
+    public string LoadPrompt()
     {
-        Console.WriteLine(questionsUsed.Count);
-        int promptQuestionIndex = GetRandomPrompt();
-        Console.WriteLine(promptQuestionIndex);
-        if (CheckIfPromptUsed(promptQuestionIndex) == false)
-        {
-            Console.WriteLine(questions[promptQuestionIndex]);
-            questionsUsed.Add(promptQuestionIndex);
-            Console.WriteLine(questionsUsed.Count);
-        }
-        else
-        {
-            Console.WriteLine(questionsUsed.Count);
-            Console.WriteLine("This question has already been used. Please try again.");
-            LoadPrompt();
-        }
+        return _prompt;
     }
 }
