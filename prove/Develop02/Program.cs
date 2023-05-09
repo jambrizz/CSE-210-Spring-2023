@@ -60,7 +60,11 @@ public class Program
                     break;
                 case 4:
                     Console.WriteLine();
-                    Console.WriteLine("Save Entries:");
+                    bool saveFile = journal.SaveJournal(_entries);
+                    if (saveFile == true)
+                    {
+                        _entries.Clear();
+                    }
                     break;
                 case 5:
                     Console.WriteLine();

@@ -22,6 +22,8 @@ public class Journal
         return entryString;
     }
 
+    //TODO: revisit this method and modify it to display an error message of the List is empty
+    //TODO: revisit this method and modify how the List is displayed so that there is no line gap between prompt question and response 
     public void DisplayJournal(List<string> List)
     {
         Console.Clear();
@@ -33,12 +35,24 @@ public class Journal
     }
 
     public void LoadJournal()
-    {
-
+    {   
+        
     }
 
-    public void SaveJournal()
+    public bool SaveJournal(List<string> List)
     {
-
+        if (List.Count == 0)
+        {
+            Console.WriteLine("There are no entries to save.");
+            return false;
+        }
+        else
+        {
+            Console.Write("Enter the name of the file you would like to save: ");
+            string name = Console.ReadLine();
+            string fileName = $"{name}.txt";
+            FileHelper fileHelper = new FileHelper();
+            return fileHelper.SaveFile(fileName, List);
+        }
     }
 }
