@@ -56,8 +56,12 @@ public class FileHelper
         }
     }
 
-    public static void LoadFile()
+    public void LoadFile(string fileName, List<string> List)
     {
-
+        string[] lines = File.ReadAllLines(fileName);
+        foreach (string line in lines)
+        {
+            List.Add(line);
+        }
     }
 }

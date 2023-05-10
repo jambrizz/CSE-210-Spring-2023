@@ -2,46 +2,50 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+    
 
 public class Journal
 {
-    
+    public static List<string> _entries = new List<string>();
 
-    public string AddEntry()
+    public void AddEntry(string entry)
     {
-        Console.Clear();
-        PromptHandler prompt = new PromptHandler();
-        prompt.GetPrompt();
-        string question = prompt.LoadPrompt();
-        Console.WriteLine(question);
-        Console.Write("> ");
-        string response = Console.ReadLine();
-        Entry entry = new Entry();
-        entry.SetEntry(question, response);
-        string entryString = entry.DisplayEntry();
-        return entryString;
+        _entries.Add(entry);       
     }
 
-    //TODO: revisit this method and modify it to display an error message of the List is empty
-    //TODO: revisit this method and modify how the List is displayed so that there is no line gap between prompt question and response 
-    public void DisplayJournal(List<string> List)
+    public void DisplayJournal()
     {
-        Console.Clear();
-        foreach (string line in List)
+        if(_entries.Count == 0)
         {
-            Console.WriteLine(line);
-            Console.WriteLine();
+            Console.WriteLine("There are no entries to display.");
+        }
+        else
+        {
+            foreach (string line in _entries)
+            {
+                Console.WriteLine(line);
+            }
         }
     }
 
-    public void LoadJournal()
+    public bool LoadJournal(string fileName)
     {   
-        
+        FileHelper fileHelper = new FileHelper();
+        if(File.Exists(fileName) == false)
+        {
+            return false;
+        }
+        else
+        {
+            fileHelper.LoadFile(fileName, _entries);
+            return true;
+        }
+
     }
 
-    public bool SaveJournal(List<string> List)
+    public bool SaveJournal()
     {
-        if (List.Count == 0)
+        if(_entries.Count == 0)
         {
             Console.WriteLine("There are no entries to save.");
             return false;
@@ -52,7 +56,24 @@ public class Journal
             string name = Console.ReadLine();
             string fileName = $"{name}.txt";
             FileHelper fileHelper = new FileHelper();
-            return fileHelper.SaveFile(fileName, List);
+            return fileHelper.SaveFile(fileName, _entries);
         }
+    }
+
+    public bool IsListEmpty()
+    {
+        if(_entries.Count == 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void ClearList()
+    {
+        _entries.Clear();
     }
 }

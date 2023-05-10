@@ -20,6 +20,6 @@ public class Entry
 
     public string DisplayEntry()
     {
-        return $"Date: {_date} - Prompt: {_prompt} \n{_response}";
+        return $"Date: {_date} - Prompt: {_prompt} \n{_response} \n";
     }
 }
