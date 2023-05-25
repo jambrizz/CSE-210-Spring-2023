@@ -4,27 +4,43 @@ using System.Linq;
 
 public class Word
 {
-    private bool _hidden;
-    private string _text;
+    private int _lenght;
 
-    public Word(string text)
+    public List<int> listLength = new List<int>();
+
+    private List<int> _savedIndexes = new List<int>();
+
+    public List<int> hiddenWords = new List<int>();
+
+    public void pickThreeWords()
     {
-        _text = text;
+        for (int i = 0; i < 3;)
+        {
+            int number = RandomNumberGenerator();
+            if(hiddenWords.Contains(number) == false)
+            {
+                hiddenWords.Add(number);
+                i++;
+            }
+            if(hiddenWords.Count == listLength[0])
+            {
+                break;
+            }
+        }
     }
 
-    public string GetVisibleText()
+    public int RandomNumberGenerator()
     {
-        return "";
-    }
-
-    public void Hide()
-    {
-
-    }
-
-    public bool IsHidden()
-    {
-        return false;
+        Random random = new Random();
+        int number = random.Next(0, listLength[0]);
+        return number;
     }
     
+    internal object wordCount(List<object> list)
+    {
+        int count = list.Count();
+        listLength.Add(count);
+        return count;
+    }
+
 }
