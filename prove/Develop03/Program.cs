@@ -55,7 +55,8 @@ class Program
                     library.GetRandomScripture();
                     Console.WriteLine(library.GetRandom());
                     library.LoadScripturesFromFiles();                  
-                    
+                    Scriptures scripture = new Scriptures();
+                    Console.WriteLine(scripture.GetText());
                     break;
                 case 2:
                     Console.WriteLine("You selected Multiple Verses.");

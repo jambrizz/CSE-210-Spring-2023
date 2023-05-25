@@ -49,6 +49,7 @@ public class ScriptureLibrary
         int number = _random;
         string text = File.ReadLines(_path).Skip(number - 1).Take(1).First();
         Console.WriteLine(text.ToString());
+        _scriptures.Add(new Scriptures(text));
     }
 
     private string ParseScriptureReference(string scripture)
