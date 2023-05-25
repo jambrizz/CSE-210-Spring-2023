@@ -49,6 +49,13 @@ class Program
             {
                 case 1:
                     Console.WriteLine("You selected Single Verse.");
+                    string file = "singleverse.txt";
+                    ScriptureLibrary library = new ScriptureLibrary(file);
+                    library.GetLengthOfTextFile();
+                    library.GetRandomScripture();
+                    Console.WriteLine(library.GetRandom());
+                    library.LoadScripturesFromFiles();                  
+                    
                     break;
                 case 2:
                     Console.WriteLine("You selected Multiple Verses.");
