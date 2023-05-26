@@ -47,16 +47,17 @@ class Program
             
             switch (selection)
             {
+                //TODO: finish case 1.
                 case 1:
                     Console.WriteLine("You selected Single Verse.");
                     string file = "singleverse.txt";
                     ScriptureLibrary library = new ScriptureLibrary(file);
                     library.GetLengthOfTextFile();
                     library.GetRandomScripture();
-                    Console.WriteLine(library.GetRandom());
+                    //Console.WriteLine(library.GetRandom());
                     library.LoadScripturesFromFiles();                  
                     Scriptures scripture = new Scriptures();
-                    Console.WriteLine(scripture.GetText());
+                    scripture.GetDisplayText();
                     break;
                 case 2:
                     Console.WriteLine("You selected Multiple Verses.");
