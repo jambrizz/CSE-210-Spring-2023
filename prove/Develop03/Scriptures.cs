@@ -5,9 +5,8 @@ using System.Linq;
 public class Scriptures
 {
     private string _text;
-    //private Random _random = new Random();
-    //private Reference _reference = new Reference(string book, int chapter, int verse);
-    //private Word _word = new Word(text);
+    private string _reference;
+    private string _displayText;
 
     public Scriptures(string text)
     {
@@ -21,5 +20,17 @@ public class Scriptures
     public string GetText()
     {
         return _text;
+    }
+
+    public string GetDisplayText()
+    {
+        string _displayText = _text;
+        
+        return _displayText;
+    }
+
+    public void SendReference()
+    {
+        Reference reference = new Reference(_reference);
     }
 }

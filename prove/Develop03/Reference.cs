@@ -6,15 +6,32 @@ public class Reference
 {
     public string _book;
 
-    public int _chapter;
+    public string _chapter;
 
-    public int _verse;
+    public string _startVerse;
 
-    public Reference(string book, int chapter, int verse)
+    public string _endVerse;
+
+    public string _reference;
+
+    public Reference(string book, string chapter, string verse)
     {
         _book = book;
         _chapter = chapter;
-        _verse = verse;
+        _endVerse = verse;
+    }
+
+    public Reference(string book, string chapter, string startVerse, string endVerse)
+    {
+        _book = book;
+        _chapter = chapter;
+        _startVerse = startVerse;
+        _endVerse = endVerse;
+    }
+
+    public Reference(string reference)
+    {
+        _reference = reference;
     }
 
     public void SetBook(string book)
@@ -22,14 +39,19 @@ public class Reference
         _book = book;
     }
 
-    public void SetChapter(int chapter)
+    public void SetChapter(string chapter)
     {
         _chapter = chapter;
     }
 
-    public void SetVerse(int verse)
+    public void SetStartVerse(string verse)
     {
-        _verse = verse;
+        _startVerse = verse;
+    }
+
+    public void SetEndVerse(string verse)
+    {
+        _endVerse = verse;
     }
 
     public string GetBook()
@@ -37,20 +59,29 @@ public class Reference
         return _book;
     }
 
-    public int GetChapter()
+    public string GetChapter()
     {
         return _chapter;
     }
 
-    public int GetVerse()
+    public string GetVerse()
     {
-        return _verse;
+        return _startVerse;
     }
 
-    public string GetReference()
+    public string GetEndVerse()
     {
-        return $"{_book} {_chapter}:{_verse}";
+        return _endVerse;
     }
 
+    public string GetReferenceSingleVerse()
+    {
+        return $"{_book} {_chapter}:{_endVerse}";
+    }
+
+    public string GetReferenceMultipleVerses()
+    {
+        return $"{_book} {_chapter}:{_startVerse}-{_endVerse}";
+    }
 
 }
