@@ -49,15 +49,22 @@ class Program
             {
                 //TODO: finish case 1.
                 case 1:
-                    Console.WriteLine("You selected Single Verse.");
                     string file = "singleverse.txt";
                     ScriptureLibrary library = new ScriptureLibrary(file);
                     library.GetLengthOfTextFile();
                     library.GetRandomScripture();
-                    //Console.WriteLine(library.GetRandom());
-                    library.LoadScripturesFromFiles();                  
-                    Scriptures scripture = new Scriptures();
-                    scripture.GetDisplayText();
+                    string text = library.LoadScripturesFromFiles();                  
+                    Scriptures scripture = new Scriptures(text);
+                    scripture.ExtractReference();
+                    string verse = scripture.ExtractVerse();
+                    string rawRef = scripture.ExtractReference();
+                    Reference reference = new Reference(rawRef);
+                    reference.SetRefernces();
+                    string refer = reference.GetReferenceSingleVerse();
+                    //////This is where I left off. I need to start working on the word class.
+                    Console.WriteLine(refer);
+                    Console.WriteLine(verse);
+
                     break;
                 case 2:
                     Console.WriteLine("You selected Multiple Verses.");

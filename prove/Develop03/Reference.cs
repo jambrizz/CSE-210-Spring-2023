@@ -33,45 +33,17 @@ public class Reference
     {
         _reference = reference;
     }
-
-    public void SetBook(string book)
+    /////////////////////////////////////////////////////////////////
+    public void SetRefernces()
     {
+        string rawReference = _reference;
+        string book = rawReference.Split("Book:")[1].Split("|")[0];
+        string chapter = rawReference.Split("Chapter:")[1].Split("|")[0];
+        string endVerse = rawReference.Split("Verse:")[1].Split("|")[0];
+
         _book = book;
-    }
-
-    public void SetChapter(string chapter)
-    {
         _chapter = chapter;
-    }
-
-    public void SetStartVerse(string verse)
-    {
-        _startVerse = verse;
-    }
-
-    public void SetEndVerse(string verse)
-    {
-        _endVerse = verse;
-    }
-
-    public string GetBook()
-    {
-        return _book;
-    }
-
-    public string GetChapter()
-    {
-        return _chapter;
-    }
-
-    public string GetVerse()
-    {
-        return _startVerse;
-    }
-
-    public string GetEndVerse()
-    {
-        return _endVerse;
+        _endVerse = endVerse;
     }
 
     public string GetReferenceSingleVerse()

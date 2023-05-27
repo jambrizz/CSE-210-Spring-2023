@@ -4,7 +4,7 @@ using System.Linq;
 
 public class Word
 {
-    private int _lenght;
+    private int _length;
 
     public List<int> listLength = new List<int>();
 

@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.IO;
 
 public class Scriptures
 {
-    private string _text;
+    public string _text;
     private string _reference;
     private string _displayText;
+
+    //private List<Scriptures> _scriptures = new List<Scriptures>();
 
     public Scriptures(string text)
     {
@@ -22,26 +26,17 @@ public class Scriptures
         return _text;
     }
 
-    //TODO: fix this method having issues with line 34
-    public string GetDisplayText()
+    public string ExtractVerse()
     {
-        string _displayText = _text;
-
-        Console.WriteLine(_displayText);
-        string [] seperator = {"|"};
-        string [] removeIdentifiers = {"Book:", "Chapter:", "Verse:", "Text:"};
-
-        string [] splitText = _displayText.Split(seperator, StringSplitOptions.RemoveEmptyEntries);
-
-        //string book = _displayText.Substring(bookIndex);
-
-        Console.WriteLine(splitText[0]); 
-        
-        return "";
+        string text = _text;
+        string verse = text.Split("Text:")[1].Split("|")[0];
+        return verse;
     }
 
-    public void SendReference()
+    public string ExtractReference()
     {
-        Reference reference = new Reference(_reference);
+        string text = _text;
+        string reference = text.Split("*")[1].Split("Text:")[0];
+        return reference;
     }
 }

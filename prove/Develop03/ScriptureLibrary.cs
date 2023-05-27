@@ -8,9 +8,6 @@ public class ScriptureLibrary
     private int _lengthOfTextFile;
 
     private string _path;
-    private List<Scriptures> _scriptures = new List<Scriptures>();
-
-    private string test;
 
     public ScriptureLibrary(string path)
     {
@@ -18,6 +15,7 @@ public class ScriptureLibrary
     }
 
     private void SetLengthOfTextFile(int length)
+    
     {
         _lengthOfTextFile = length;
     }
@@ -44,12 +42,11 @@ public class ScriptureLibrary
         _random = number;
     }
 
-    public void LoadScripturesFromFiles()
+    public string LoadScripturesFromFiles()
     {
         int number = _random;
         string text = File.ReadLines(_path).Skip(number - 1).Take(1).First();
-        Console.WriteLine(text.ToString());
-        _scriptures.Add(new Scriptures(text));
+        return text;
     }
 
     private string ParseScriptureReference(string scripture)
