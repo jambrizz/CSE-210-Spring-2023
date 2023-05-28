@@ -60,10 +60,13 @@ class Program
                     string rawRef = scripture.ExtractReference();
                     Reference reference = new Reference(rawRef);
                     reference.SetRefernces();
-                    string refer = reference.GetReferenceSingleVerse();
+                    string referenceToDisplay = reference.GetReferenceSingleVerse();
                     //////This is where I left off. I need to start working on the word class.
-                    Console.WriteLine(refer);
-                    Console.WriteLine(verse);
+                    Console.WriteLine(referenceToDisplay);
+                    Word word = new Word();
+                    word.AddVerseToList(verse);
+                    //word.DisplayVerse();
+                    
 
                     break;
                 case 2:

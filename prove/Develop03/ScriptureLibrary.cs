@@ -20,15 +20,6 @@ public class ScriptureLibrary
         _lengthOfTextFile = length;
     }
 
-    public int GetRandom()
-    {
-        return _random;
-    }
-
-    public int LengthOfTextFile()
-    {
-        return _lengthOfTextFile;
-    }
     public void GetLengthOfTextFile()
     {
         int number = File.ReadLines(_path).Count();
@@ -48,11 +39,4 @@ public class ScriptureLibrary
         string text = File.ReadLines(_path).Skip(number - 1).Take(1).First();
         return text;
     }
-
-    private string ParseScriptureReference(string scripture)
-    {
-        return "";
-    }
-
-   
 }

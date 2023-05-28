@@ -8,7 +8,7 @@ public class Word
 
     public List<int> listLength = new List<int>();
 
-    private List<int> _savedIndexes = new List<int>();
+    private List<string> _verseToDisplay = new List<string>();
 
     public List<int> hiddenWords = new List<int>();
 
@@ -43,4 +43,25 @@ public class Word
         return count;
     }
 
+    public void AddVerseToList(string text)
+    {
+        foreach (var item in text)
+        {
+            string newItem = item.ToString();
+            string word;
+            if(newItem != " ")
+            {
+            
+            }
+        }
+    }
+
+    public void DisplayVerse()
+    {
+        foreach (var word in _verseToDisplay)
+        {
+            Console.WriteLine(word);
+        }
+        Console.WriteLine(_verseToDisplay.Count);
+    }
 }
