@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 class Program
 {
@@ -62,10 +65,62 @@ class Program
                     reference.SetRefernces();
                     string referenceToDisplay = reference.GetReferenceSingleVerse();
                     //////This is where I left off. I need to start working on the word class.
-                    Console.WriteLine(referenceToDisplay);
                     Word word = new Word();
                     word.AddVerseToList(verse);
-                    //word.DisplayVerse();
+                    string rawVerse = word.DisplayVerse();
+                    bool userInput1 = false;
+                    while(userInput1 == false)
+                    {
+                        Console.WriteLine($"{referenceToDisplay} {rawVerse}\n\n Press enter to continue or type 'quit' to finish.");
+                        Console.Write("> ");
+                        string userAction1 = Console.ReadLine().ToLower();
+                        if(userAction1 == "")
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("You hit enter.");
+                            userInput1 = true;
+                        }
+                        else if(userAction1 == "quit")
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Thank you for using the Scripture Memorization Program. Goodbye!");
+                            Environment.Exit(0);
+                        }
+                        else
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Invalid selection please try again.");
+                        }
+                    }
+                    bool programRun = false;
+                    while(programRun == false)
+                    {
+                        word.HideText();
+                        string hiddenWordVerse = word.DisplayVerseWithHiddenWords();
+                        Console.WriteLine($"{referenceToDisplay} {hiddenWordVerse}");
+                        Console.Write("> ");
+                        string userAction2 = Console.ReadLine().ToLower();
+                        if(userAction2 == "")
+                        {
+                            //TODO: add code to display the hidden words past the first use.
+                            //TODO add code to check if _verseToDisplay count is equal to hiddenWords count. If so, then the program is finished.
+                            //TODO: create a method to get a bool value on the above TODO to decide to end the program.
+                            Console.WriteLine();
+                            Console.WriteLine("You hit enter.");
+                            programRun = true;
+                        }
+                        else if(userAction2 == "quit")
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Thank you for using the Scripture Memorization Program. Goodbye!");
+                            Environment.Exit(0);
+                        }
+                        else
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Invalid selection please try again.");
+                        }
+                    }
                     
 
                     break;

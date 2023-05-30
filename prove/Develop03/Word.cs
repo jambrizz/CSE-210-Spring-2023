@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 public class Word
 {
@@ -10,11 +11,13 @@ public class Word
 
     private List<string> _verseToDisplay = new List<string>();
 
+    private List<string> _newVerseToDisplay = new List<string>();
+
     public List<int> hiddenWords = new List<int>();
 
     public void pickThreeWords()
     {
-        for (int i = 0; i < 3;)
+        for (int i = 0; i < 4;)
         {
             int number = RandomNumberGenerator();
             if(hiddenWords.Contains(number) == false)
@@ -22,7 +25,7 @@ public class Word
                 hiddenWords.Add(number);
                 i++;
             }
-            if(hiddenWords.Count == listLength[0])
+            if(hiddenWords.Count == _verseToDisplay.Count())
             {
                 break;
             }
@@ -32,7 +35,7 @@ public class Word
     public int RandomNumberGenerator()
     {
         Random random = new Random();
-        int number = random.Next(0, listLength[0]);
+        int number = random.Next(0, _verseToDisplay.Count());
         return number;
     }
     
@@ -45,23 +48,52 @@ public class Word
 
     public void AddVerseToList(string text)
     {
-        foreach (var item in text)
+        string[] words = text.Split(" ");
+        foreach (var item in words)
         {
-            string newItem = item.ToString();
-            string word;
-            if(newItem != " ")
-            {
-            
-            }
+            _verseToDisplay.Add(item);
         }
     }
 
-    public void DisplayVerse()
+    public string DisplayVerse()
     {
-        foreach (var word in _verseToDisplay)
+        string verse = "";
+        foreach (var item in _verseToDisplay)
         {
-            Console.WriteLine(word);
+            verse += item + " "; 
         }
-        Console.WriteLine(_verseToDisplay.Count);
+        return verse;
+    }
+
+    public string DisplayVerseWithHiddenWords()
+    {
+        string verse = "";
+        foreach (var item in _newVerseToDisplay)
+        {
+            verse += item + " "; 
+        }
+        return verse;
+    }
+
+    public void HideText()
+    {
+        pickThreeWords();
+        foreach (var item in _verseToDisplay)
+        {
+            int wordLength = item.Length;
+            if(hiddenWords.Contains(_verseToDisplay.IndexOf(item)))
+            {
+                for (int i = 0; i < wordLength;)
+                {
+                    _newVerseToDisplay.Add("_");
+                    i++;
+                }
+            }
+            else
+            {
+                _newVerseToDisplay.Add(item);
+            }
+        }
+
     }
 }
