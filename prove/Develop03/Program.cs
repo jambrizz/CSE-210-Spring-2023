@@ -64,13 +64,20 @@ class Program
                     Reference reference = new Reference(rawRef);
                     reference.SetRefernces();
                     string referenceToDisplay = reference.GetReferenceSingleVerse();
-                    //////This is where I left off. I need to start working on the word class.
                     Word word = new Word();
                     word.AddVerseToList(verse);
                     string rawVerse = word.DisplayVerse();
+                    Console.Clear();
+                    Console.WriteLine($"{referenceToDisplay} {rawVerse}");
+                    Console.WriteLine("Press enter to continue or type 'quit' to finish.");
+                    Console.Write("> ");
+                    string userAction1 = Console.ReadLine().ToLower();
+                ////////////////////This is where I left off/////////////////////
+                //TODO: finish case 1. the issue is that the program doesn't end right after all the words are hidden. you have to hit enter again to end the program.
                     bool userInput1 = false;
                     while(userInput1 == false)
                     {
+                        /*
                         Console.WriteLine($"{referenceToDisplay} {rawVerse}\n\n Press enter to continue or type 'quit' to finish.");
                         Console.Write("> ");
                         string userAction1 = Console.ReadLine().ToLower();
@@ -91,7 +98,9 @@ class Program
                             Console.WriteLine();
                             Console.WriteLine("Invalid selection please try again.");
                         }
+                        */
                     }
+                    /*
                     bool programRun = false;
                     while(programRun == false)
                     {
@@ -102,12 +111,16 @@ class Program
                         string userAction2 = Console.ReadLine().ToLower();
                         if(userAction2 == "")
                         {
-                            //TODO: add code to display the hidden words past the first use.
-                            //TODO add code to check if _verseToDisplay count is equal to hiddenWords count. If so, then the program is finished.
-                            //TODO: create a method to get a bool value on the above TODO to decide to end the program.
-                            Console.WriteLine();
-                            Console.WriteLine("You hit enter.");
-                            programRun = true;
+                            bool programComplete = word.CheckIfComplete();
+                            if(programComplete == true)
+                            {
+                                programRun = true;
+                            }
+                            Console.Clear();
+                            word.HideText();
+                            word.DisplayVerseWithHiddenWords();
+                            Console.WriteLine($"{referenceToDisplay} {hiddenWordVerse}");
+
                         }
                         else if(userAction2 == "quit")
                         {
@@ -121,8 +134,7 @@ class Program
                             Console.WriteLine("Invalid selection please try again.");
                         }
                     }
-                    
-
+                    */
                     break;
                 case 2:
                     Console.WriteLine("You selected Multiple Verses.");

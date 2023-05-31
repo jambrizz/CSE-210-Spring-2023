@@ -17,7 +17,7 @@ public class Word
 
     public void pickThreeWords()
     {
-        for (int i = 0; i < 4;)
+        for (int i = 0; i < 3;)
         {
             int number = RandomNumberGenerator();
             if(hiddenWords.Contains(number) == false)
@@ -78,6 +78,7 @@ public class Word
     public void HideText()
     {
         pickThreeWords();
+        _newVerseToDisplay.Clear();
         foreach (var item in _verseToDisplay)
         {
             int wordLength = item.Length;
@@ -95,5 +96,23 @@ public class Word
             }
         }
 
+    }
+
+    public bool CheckIfComplete()
+    {
+        bool programComplete;
+        int count1 = _verseToDisplay.Count();
+        int count2 = hiddenWords.Count();
+        Console.WriteLine($"count1: {count1}");
+        Console.WriteLine($"count2: {count2}");
+        if(count1 == count2)
+        {
+            programComplete = true;
+        }
+        else
+        {
+            programComplete = false;
+        }
+        return programComplete;
     }
 }
