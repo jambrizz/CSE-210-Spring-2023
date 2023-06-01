@@ -44,6 +44,22 @@ public class Reference
         _book = book;
         _chapter = chapter;
         _endVerse = endVerse;
+    
+    }
+
+    public void SetMultipleVerses()
+    {
+        string rawReference = _reference;
+        string book = rawReference.Split("Book:")[1].Split("|")[0];
+        string chapter = rawReference.Split("Chapter:")[1].Split("|")[0];
+        string verses = rawReference.Split("Verses:")[1].Split("|")[0];
+        string startVerse = verses.Split("-")[0];
+        string endVerse = verses.Split("-")[1];
+
+        _book = book;
+        _chapter = chapter;
+        _startVerse = startVerse;
+        _endVerse = endVerse;
     }
 
     public string GetReferenceSingleVerse()

@@ -2,3 +2,4 @@
 *Book:John|Chapter:3|Verse:16|Text:For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.|
 *Book:Proverbs|Chapter:3|Verse:6|Text:In all thy ways acknowledge him, and he shall direct thy paths.|
 *Book:1 Peter|Chapter:5|Verse:7|Text:Casting all your care upon him; for he careth for you.|
+*Book:Alma|Chapter:36|Verse:3|Text:And now, O my son Helaman, behold, thou art in thy youth, and therefore, I beseech of thee that thou wilt hear my words and learn of me; for I do know that whosoever shall put their trust in God shall be supported in their trials, and their troubles, and their afflictions, and shall be lifted up at the last day.|

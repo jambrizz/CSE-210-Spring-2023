@@ -37,6 +37,7 @@ class Program
                 {
                     Console.WriteLine();
                     Console.WriteLine("Thank you for using the Scripture Memorization Program. Goodbye!");
+                    Console.WriteLine();
                     //This line of code below is used to exit the program without trigerring the switch.
                     Environment.Exit(0);
                 }
@@ -69,60 +70,27 @@ class Program
                     string rawVerse = word.DisplayVerse();
                     Console.Clear();
                     Console.WriteLine($"{referenceToDisplay} {rawVerse}");
+                    Console.WriteLine();
                     Console.WriteLine("Press enter to continue or type 'quit' to finish.");
                     Console.Write("> ");
                     string userAction1 = Console.ReadLine().ToLower();
-                ////////////////////This is where I left off/////////////////////
-                //TODO: finish case 1. the issue is that the program doesn't end right after all the words are hidden. you have to hit enter again to end the program.
+                
                     bool userInput1 = false;
                     while(userInput1 == false)
                     {
-                        /*
-                        Console.WriteLine($"{referenceToDisplay} {rawVerse}\n\n Press enter to continue or type 'quit' to finish.");
-                        Console.Write("> ");
-                        string userAction1 = Console.ReadLine().ToLower();
-                        if(userAction1 == "")
+
+                        if (userAction1 == "")
                         {
-                            Console.WriteLine();
-                            Console.WriteLine("You hit enter.");
-                            userInput1 = true;
-                        }
-                        else if(userAction1 == "quit")
-                        {
-                            Console.WriteLine();
-                            Console.WriteLine("Thank you for using the Scripture Memorization Program. Goodbye!");
-                            Environment.Exit(0);
-                        }
-                        else
-                        {
-                            Console.WriteLine();
-                            Console.WriteLine("Invalid selection please try again.");
-                        }
-                        */
-                    }
-                    /*
-                    bool programRun = false;
-                    while(programRun == false)
-                    {
-                        word.HideText();
-                        string hiddenWordVerse = word.DisplayVerseWithHiddenWords();
-                        Console.WriteLine($"{referenceToDisplay} {hiddenWordVerse}");
-                        Console.Write("> ");
-                        string userAction2 = Console.ReadLine().ToLower();
-                        if(userAction2 == "")
-                        {
-                            bool programComplete = word.CheckIfComplete();
-                            if(programComplete == true)
-                            {
-                                programRun = true;
-                            }
                             Console.Clear();
                             word.HideText();
-                            word.DisplayVerseWithHiddenWords();
+                            string hiddenWordVerse = word.DisplayVerseWithHiddenWords();
                             Console.WriteLine($"{referenceToDisplay} {hiddenWordVerse}");
-
+                            Console.WriteLine();
+                            Console.WriteLine("Press enter to continue or type 'quit' to finish.");
+                            Console.Write("> ");
+                            userAction1 = Console.ReadLine().ToLower();
                         }
-                        else if(userAction2 == "quit")
+                        else if (userAction1 == "quit")
                         {
                             Console.WriteLine();
                             Console.WriteLine("Thank you for using the Scripture Memorization Program. Goodbye!");
@@ -133,11 +101,74 @@ class Program
                             Console.WriteLine();
                             Console.WriteLine("Invalid selection please try again.");
                         }
+
+                        bool programComplete = word.CheckIfComplete();
+                        if (programComplete == true)
+                        {
+                            userInput1 = true;
+                            Console.WriteLine();
+                            Console.WriteLine("You have completed this scripture. See you next time!");
+                            Console.WriteLine();
+                        }
                     }
-                    */
                     break;
                 case 2:
-                    Console.WriteLine("You selected Multiple Verses.");
+                    string file2 = "multipleverses.txt";
+                    ScriptureLibrary library2 = new ScriptureLibrary(file2);
+                    library2.GetLengthOfTextFile();
+                    library2.GetRandomScripture();
+                    string text2 = library2.LoadScripturesFromFiles();
+                    Scriptures scripture2 = new Scriptures(text2);
+                    string rawRef2 = scripture2.ExtractReference();
+                    string verse2 = scripture2.ExtractVerse();
+                    Reference reference2 = new Reference(rawRef2);
+                    reference2.SetMultipleVerses();
+                    string referenceToDisplay2 = reference2.GetReferenceMultipleVerses();
+                    Word word2 = new Word();
+                    word2.AddVerseToList(verse2);
+                    string rawVerse2 = word2.DisplayVerse();
+                    Console.Clear();
+                    Console.WriteLine($"{referenceToDisplay2} {rawVerse2}");
+                    Console.WriteLine();
+                    Console.WriteLine("Press enter to continue or type 'quit' to finish.");
+                    Console.Write("> ");
+                    string userAction2 = Console.ReadLine().ToLower();
+
+                    bool userInput2 = false;
+                    while(userInput2 == false)
+                    {
+                        if (userAction2 == "")
+                        {
+                            Console.Clear();
+                            word2.HideText();
+                            string hiddenWordVerse2 = word2.DisplayVerseWithHiddenWords();
+                            Console.WriteLine($"{referenceToDisplay2} {hiddenWordVerse2}");
+                            Console.WriteLine();
+                            Console.WriteLine("Press enter to continue or type 'quit' to finish.");
+                            Console.Write("> ");
+                            userAction2 = Console.ReadLine().ToLower();
+                        }
+                        else if (userAction2 == "quit")
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Thank you for using the Scripture Memorization Program. Goodbye!");
+                            Environment.Exit(0);
+                        }
+                        else
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Invalid selection please try again.");
+                        }
+
+                        bool programComplete2 = word2.CheckIfComplete();
+                        if (programComplete2 == true)
+                        {
+                            userInput2 = true;
+                            Console.WriteLine();
+                            Console.WriteLine("You have completed this scripture. See you next time!");
+                            Console.WriteLine();
+                        }
+                    }
                     break;
                 default:
                     break;
