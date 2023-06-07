@@ -16,6 +16,21 @@ public class Activity
         _activityTime = time;
     }
 
+    public Activity(string activityName)
+    {
+        _activityName = activityName;
+    }
+
+    public Activity(int time)
+    {
+        _activityTime = time;
+    }
+
+    public Activity()
+    {
+
+    }
+
     public void SetActivityName(string activityName)
     {
         _activityName = activityName;
@@ -33,7 +48,9 @@ public class Activity
 
     public void GetReady()
     {
-
+        Console.WriteLine("Get ready...");
+        Animation animation = new Animation();
+        animation.AnimationDisplayStandard();
     }
 
     public void GetDone()
@@ -43,7 +60,7 @@ public class Activity
 
     public string GetActivityName()
     {
-        return _activityName;
+        return $"Welcome to the {_activityName} Activity.";
     }
 
     public int GetActivityTime()

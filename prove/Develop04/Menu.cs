@@ -45,8 +45,46 @@ public class Menu
             switch (selection)
             {
                 case 1:
+                    int time = 0;
+                    bool runBreathing1 = false;
+                    while (runBreathing1 == false)
+                    {
+                        Activity activity = new Activity("Breathing");
+                        Console.WriteLine();
+                        Console.WriteLine(activity.GetActivityName());
+                        Console.WriteLine();
+                        Breathing breathing = new Breathing();
+                        Console.WriteLine(breathing.GetMessage1());
+                        Console.WriteLine();
+                        Console.Write("How long, in seconds, would you like for your session to last?:> ");
+                        string timeChoice = Console.ReadLine();
+                        bool validTime = int.TryParse(timeChoice, out int timeChoiceInt);
+                        if (validTime == false)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Please enter a valid number.");
+                            Console.WriteLine();
+                        }
+                        else if (validTime == true && timeChoiceInt < 8)
+                        {
+                            Console.Clear();
+                            Console.WriteLine($"You selected {timeChoiceInt} seconds, which is too short. Please enter at least 8 seconds or more.");
+                            Console.WriteLine();
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            time = timeChoiceInt;
+                            runBreathing1 = true;
+                        }
+                    }
                     Console.WriteLine();
-                    Console.WriteLine("Starting Breathing Activity...");
+                    Console.WriteLine($"You selected {time} seconds.");
+                    Activity activity2 = new Activity(time);
+                    activity2.GetReady();
+                    /////////////////////////////////////////
+                    ///this is where I left off
+                    /////////////////////////////////////////
                     Environment.Exit(0);
                     break;
                 case 2:
