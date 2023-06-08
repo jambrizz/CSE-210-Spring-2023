@@ -41,5 +41,35 @@ public class Breathing : Activity
         return _message1;
     }
 
+    public int SplitTime(int time)
+    {
+        int pairs = 0;
+        bool endLoop = false;
+        while (endLoop == false)
+        {
+          /////////////////////////////
+          //TODO: fix this algorithm to split up the time in equal parts//
+          ////////////////////////////  
+        }
+        /*
+        for (int i = 0; i < time; i++)
+        {
+            if (time % 2 == 0)
+            {
+                pairs = time / 2;
+            }
+            else
+            {
+                pairs = (time - 1) / 2;
+            }
+        }*/
+        return pairs;
+    }
+
+    public string DisplayBreathingExcercise(int time, int pairs)
+    {
+        return "";   
+    }
+
     //TODO: add a method to split up the time into equals parts for breath in and out
 }

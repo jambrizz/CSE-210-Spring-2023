@@ -83,6 +83,8 @@ public class Menu
                     Console.WriteLine($"You selected {time} seconds.");
                     Activity activity2 = new Activity(time);
                     activity2.GetReady();
+                    Breathing breathing2 = new Breathing();
+                    Console.WriteLine(breathing2.SplitTime(time));
                     /////////////////////////////////////////
                     ///this is where I left off
                     /////////////////////////////////////////
