@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 public class Breathing : Activity
 {
-    private string _description;
-    private string _message1 = "This activity will help you relax by walking you through breathing in and out slowly. Clear your mind and focus on your breathing.";
+    private string _description = "This activity will help you relax by walking you through breathing in and out slowly. Clear your mind and focus on your breathing.";
+    private string _message1 = $"Breath in... ";
 
-    private string _message2 = $"";
+    private string _message2 = $"Breath out... ";
 
     private int _seconds;
 
@@ -36,40 +36,20 @@ public class Breathing : Activity
         return _description;
     }
 
-    public string GetMessage1()
+    //TODO: Fix the method below to display the breathing exercise it currently does not display the messages
+    public void DisplayBreathingExcercise(int time1, int time2)
     {
-        return _message1;
-    }
-
-    public int SplitTime(int time)
-    {
-        int pairs = 0;
-        bool endLoop = false;
-        while (endLoop == false)
+        bool runBreathing = ActivityTimer(time1);
+        while (runBreathing == true)
         {
-          /////////////////////////////
-          //TODO: fix this algorithm to split up the time in equal parts//
-          ////////////////////////////  
+            
+            Console.Write($"{_message1}");
+            CountDown(time2);
+            Console.WriteLine();
+            Console.Write($"{_message2}");
+            CountDown(time2);
+            Console.WriteLine();
         }
-        /*
-        for (int i = 0; i < time; i++)
-        {
-            if (time % 2 == 0)
-            {
-                pairs = time / 2;
-            }
-            else
-            {
-                pairs = (time - 1) / 2;
-            }
-        }*/
-        return pairs;
     }
 
-    public string DisplayBreathingExcercise(int time, int pairs)
-    {
-        return "";   
-    }
-
-    //TODO: add a method to split up the time into equals parts for breath in and out
 }

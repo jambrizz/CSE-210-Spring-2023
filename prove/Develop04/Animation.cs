@@ -35,11 +35,12 @@ public class Animation
         foreach (string item in _animation)
         {
             //SetCursorPosition sets the cursor position to the specified coordinates (x, y)
-            SetCursorPosition(0, 3);
+            SetCursorPosition(0, 1);
             Console.Write(item);
             Thread.Sleep(200);
         }
         //CursorVisible shows the cursor after the animation is done
+        Console.Clear();
         CursorVisible = true;
     }
 

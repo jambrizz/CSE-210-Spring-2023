@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 public class Menu
 {
@@ -50,12 +51,12 @@ public class Menu
                     bool runBreathing1 = false;
                     while (runBreathing1 == false)
                     {
-                        Activity activity = new Activity("Breathing");
-                        Console.WriteLine();
-                        Console.WriteLine(activity.GetActivityName());
-                        Console.WriteLine();
+                        //Activity activity = new Activity("Breathing");
+                        Console.Clear();
                         Breathing breathing = new Breathing();
-                        Console.WriteLine(breathing.GetMessage1());
+                        Console.WriteLine(breathing.GetActivityName());
+                        Console.WriteLine();
+                        Console.WriteLine(breathing.GetActivityDescription());
                         Console.WriteLine();
                         Console.Write("How long, in seconds, would you like for your session to last?:> ");
                         string timeChoice = Console.ReadLine();
@@ -79,12 +80,12 @@ public class Menu
                             runBreathing1 = true;
                         }
                     }
-                    Console.WriteLine();
-                    Console.WriteLine($"You selected {time} seconds.");
                     Activity activity2 = new Activity(time);
                     activity2.GetReady();
                     Breathing breathing2 = new Breathing();
-                    Console.WriteLine(breathing2.SplitTime(time));
+                    breathing2.DisplayBreathingExcercise(time, 4);
+
+                    
                     /////////////////////////////////////////
                     ///this is where I left off
                     /////////////////////////////////////////

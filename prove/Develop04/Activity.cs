@@ -2,14 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using static System.Console;
+using Timer = System.Threading.Timer;
 
 public class Activity
 {
+    private static Timer timer;
+
+    private static int counter;
+
     private string _activityName;
     private int _activityTime;
 
     private string _message;
+   
 
     public Activity(string activityName, int time)
     {
@@ -42,16 +50,12 @@ public class Activity
         _activityTime = time;
     }
 
-    public void CountDown(int time)
-    {
-
-    }
-
     public void GetReady()
     {
         Console.WriteLine("Get ready...");
         Animation animation = new Animation();
         animation.AnimationDisplayStandard();
+
     }
 
     public void GetDone()
@@ -67,5 +71,57 @@ public class Activity
     public int GetActivityTime()
     {
         return _activityTime;
+    }
+
+    /******************************************************/
+    /********* Time related methods & attributes **********/
+    /******************************************************/
+    
+    private static System.Timers.Timer aTimer;
+
+    private static void SetTimer()
+    {
+        // Create a timer with a two second interval.
+        aTimer = new System.Timers.Timer(1000);
+        // Hook up the Elapsed event for the timer. 
+        aTimer.Elapsed += OnTimedEvent;
+        aTimer.AutoReset = true;
+        aTimer.Enabled = true;
+    }
+
+    private static void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
+    {
+        counter++;
+        //Console.WriteLine($"The counter is {counter}");
+    }
+
+    public bool ActivityTimer(int time)
+    {
+        //CursorVisible = false;
+        SetTimer();
+        counter = 1;
+        while (counter < time)
+        {
+            Thread.Sleep(1000);
+        }
+        aTimer.Stop();
+        aTimer.Dispose();
+        Console.WriteLine("Timer stopped");
+        //CursorVisible = true;
+        return false;
+    }
+
+    public void CountDown(int time)
+    {
+        CursorVisible = false;
+       for (int i = time; i > 0; i--)
+       {
+            Console.Write(i);
+            System.Threading.Thread.Sleep(1000);
+            Console.Write("\b \b");
+            Console.Write("\b \b");
+       }
+       CursorVisible = true;
+       //return true;
     }
 }
