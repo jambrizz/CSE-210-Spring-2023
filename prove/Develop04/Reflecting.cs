@@ -15,7 +15,7 @@ public class Reflecting : Activity
 
     private List<string> _questionList = new List<string>();
 
-    private List<string> _userQuestionList = new List<string>();
+    private List<string> _DisplayedQuestionList = new List<string>();
 
     //Might need to change the constructor
     public Reflecting(string activityName, int time, string description, string prompt, string question) : base(activityName, time)
@@ -24,5 +24,24 @@ public class Reflecting : Activity
         _prompt = prompt;
         _question = question;
     }
-    
+
+    public Reflecting() : base()
+    {
+
+    }
+
+    public void GetQuestion()
+    {
+
+    }
+
+    public void GetPrompt()
+    {
+
+    }
+
+    public void RandomQuestion()
+    {
+
+    }
 }
