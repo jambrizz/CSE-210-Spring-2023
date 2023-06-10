@@ -89,8 +89,54 @@ public class Menu
                     Environment.Exit(0);
                     break;
                 case 2:
-                    Console.WriteLine();
-                    Console.WriteLine("Starting Reflecting Activity...");
+                    Console.Clear();
+                    int time2 = 0;
+                    bool runReflecting = false;
+                    Reflecting reflecting = new Reflecting();
+                    reflecting.SetActivityName("Reflecting");
+                    while (runReflecting == false)
+                    {
+                        Console.WriteLine(reflecting.DisplayStartingMessage());
+                        Console.WriteLine();
+                        Console.WriteLine(reflecting.GetDescription());
+                        Console.WriteLine();
+                        Console.Write("How long, in seconds, would you like for your session to last?:> "); 
+                        string timeChoice = Console.ReadLine();
+                        bool validTime = int.TryParse(timeChoice, out int timeChoiceInt);
+            
+                        if (validTime == false)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("<===============><===============>");
+                            Console.WriteLine("Please enter a valid number.");
+                            Console.WriteLine("<===============><===============>");
+                            Console.WriteLine();
+                        }
+                        else if (validTime == true && timeChoiceInt < 10)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("<===============><===============><===============><===============><===============><===============>");
+                            Console.WriteLine($"You selected {timeChoiceInt} seconds, which is not enough time to reflect. Please enter at least 10 seconds or more.");
+                            Console.WriteLine("<===============><===============><===============><===============><===============><===============>");
+                            Console.WriteLine();
+                        }
+                        else if (validTime == true && timeChoiceInt > 160)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("<===============><===============><===============><===============><===============><===============>");
+                            Console.WriteLine($"You selected {timeChoiceInt} seconds, which is too much time for this activity. Please enter 160 seconds or less.");
+                            Console.WriteLine("<===============><===============><===============><===============><===============><===============>");
+                            Console.WriteLine();
+                        }
+                        else
+                        {
+                            time2 = timeChoiceInt;
+                            runReflecting = true;
+                        } 
+                    }
+                    Console.Clear();
+                    Reflecting reflecting2 = new Reflecting();
+                    reflecting2.RandomQuestion(time2);
                     Environment.Exit(0);
                     break;
                 case 3:
