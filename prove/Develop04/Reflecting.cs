@@ -5,7 +5,7 @@ using System.Text;
 
 public class Reflecting : Activity
 {
-    private string _description;
+    private string _description = "This Activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.";
 
     private string _prompt;
 
@@ -24,4 +24,5 @@ public class Reflecting : Activity
         _prompt = prompt;
         _question = question;
     }
+    
 }

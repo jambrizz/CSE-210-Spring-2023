@@ -27,20 +27,17 @@ public class Animation
         "\\"
     };
 
-    //TODO: add parameters to the AnimationDisplay methods to allow for custom cursor positions
+    
     public void AnimationDisplayStandard()
     {
-        //CursorVisible hides the cursor
         CursorVisible = false;
         foreach (string item in _animation)
         {
-            //SetCursorPosition sets the cursor position to the specified coordinates (x, y)
-            SetCursorPosition(0, 1);
             Console.Write(item);
             Thread.Sleep(200);
+            Console.Write("\b \b");
         }
-        //CursorVisible shows the cursor after the animation is done
-        Console.Clear();
+        Console.WriteLine();
         CursorVisible = true;
     }
 

@@ -7,12 +7,9 @@ using System.Threading.Tasks;
 using static System.Console;
 using Timer = System.Threading.Timer;
 
+
 public class Activity
 {
-    private static Timer timer;
-
-    private static int counter;
-
     private string _activityName;
     private int _activityTime;
 
@@ -60,12 +57,19 @@ public class Activity
 
     public void GetDone()
     {
-
+        Console.WriteLine("Well done!");
+        Animation animation = new Animation();
+        animation.AnimationDisplayStandard();
     }
 
-    public string GetActivityName()
+    public string DisplayStartingMessage()
     {
         return $"Welcome to the {_activityName} Activity.";
+    }
+
+    public string DisplayEndingMessage()
+    {
+        return $"You have completed another {_activityTime} seconds of the {_activityName} Activity.";
     }
 
     public int GetActivityTime()
@@ -77,38 +81,15 @@ public class Activity
     /********* Time related methods & attributes **********/
     /******************************************************/
     
-    private static System.Timers.Timer aTimer;
 
-    private static void SetTimer()
+    public object GetDateTime()
     {
-        // Create a timer with a two second interval.
-        aTimer = new System.Timers.Timer(1000);
-        // Hook up the Elapsed event for the timer. 
-        aTimer.Elapsed += OnTimedEvent;
-        aTimer.AutoReset = true;
-        aTimer.Enabled = true;
+        return DateTime.Now;
     }
 
-    private static void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
+    public object AddSeconds(int seconds)
     {
-        counter++;
-        //Console.WriteLine($"The counter is {counter}");
-    }
-
-    public bool ActivityTimer(int time)
-    {
-        //CursorVisible = false;
-        SetTimer();
-        counter = 1;
-        while (counter < time)
-        {
-            Thread.Sleep(1000);
-        }
-        aTimer.Stop();
-        aTimer.Dispose();
-        Console.WriteLine("Timer stopped");
-        //CursorVisible = true;
-        return false;
+        return DateTime.Now.AddSeconds(seconds);
     }
 
     public void CountDown(int time)
@@ -119,9 +100,8 @@ public class Activity
             Console.Write(i);
             System.Threading.Thread.Sleep(1000);
             Console.Write("\b \b");
-            Console.Write("\b \b");
+            //Console.Write("\b \b");
        }
        CursorVisible = true;
-       //return true;
     }
 }

@@ -49,12 +49,12 @@ public class Menu
                 case 1:
                     int time = 0;
                     bool runBreathing1 = false;
+                    Breathing breathing = new Breathing();
+                    breathing.SetActivityName("Breathing");
                     while (runBreathing1 == false)
                     {
-                        //Activity activity = new Activity("Breathing");
                         Console.Clear();
-                        Breathing breathing = new Breathing();
-                        Console.WriteLine(breathing.GetActivityName());
+                        Console.WriteLine(breathing.DisplayStartingMessage());
                         Console.WriteLine();
                         Console.WriteLine(breathing.GetActivityDescription());
                         Console.WriteLine();
@@ -85,10 +85,7 @@ public class Menu
                     Breathing breathing2 = new Breathing();
                     breathing2.DisplayBreathingExcercise(time, 4);
 
-                    
-                    /////////////////////////////////////////
-                    ///this is where I left off
-                    /////////////////////////////////////////
+                    //Possibly remove the Environment.Exit(0) and replace with a return to menu option
                     Environment.Exit(0);
                     break;
                 case 2:
