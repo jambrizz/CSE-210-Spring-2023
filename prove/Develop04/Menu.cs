@@ -47,13 +47,13 @@ public class Menu
             switch (selection)
             {
                 case 1:
+                    Console.Clear();
                     int time = 0;
                     bool runBreathing1 = false;
                     Breathing breathing = new Breathing();
                     breathing.SetActivityName("Breathing");
                     while (runBreathing1 == false)
                     {
-                        Console.Clear();
                         Console.WriteLine(breathing.DisplayStartingMessage());
                         Console.WriteLine();
                         Console.WriteLine(breathing.GetActivityDescription());
@@ -64,13 +64,17 @@ public class Menu
                         if (validTime == false)
                         {
                             Console.Clear();
+                            Console.WriteLine("<===============><===============>");
                             Console.WriteLine("Please enter a valid number.");
+                            Console.WriteLine("<===============><===============>");
                             Console.WriteLine();
                         }
                         else if (validTime == true && timeChoiceInt < 8)
                         {
                             Console.Clear();
+                            Console.WriteLine("<===============><===============><===============><===============><===============><===============>");
                             Console.WriteLine($"You selected {timeChoiceInt} seconds, which is too short. Please enter at least 8 seconds or more.");
+                            Console.WriteLine("<===============><===============><===============><===============><===============><===============>");
                             Console.WriteLine();
                         }
                         else
@@ -84,9 +88,6 @@ public class Menu
                     activity2.GetReady();
                     Breathing breathing2 = new Breathing();
                     breathing2.DisplayBreathingExcercise(time, 4);
-
-                    //Possibly remove the Environment.Exit(0) and replace with a return to menu option
-                    Environment.Exit(0);
                     break;
                 case 2:
                     Console.Clear();
@@ -137,12 +138,45 @@ public class Menu
                     Console.Clear();
                     Reflecting reflecting2 = new Reflecting();
                     reflecting2.RandomQuestion(time2);
-                    Environment.Exit(0);
                     break;
                 case 3:
-                    Console.WriteLine();
-                    Console.WriteLine("Starting Listing Activity...");
-                    Environment.Exit(0);
+                    Console.Clear();
+                    int time3 = 0;
+                    bool runListing = false;
+                    Listing listing = new Listing();
+                    listing.SetActivityName("Listing");
+                    while (runListing == false)
+                    {
+                        Console.WriteLine(listing.DisplayStartingMessage());
+                        Console.WriteLine();
+                        Console.WriteLine(listing.GetDescription());
+                        Console.WriteLine();
+                        Console.Write("How long, in seconds, would you like for your session to last?:> ");
+                        string timeChoice = Console.ReadLine();
+                        bool validTime = int.TryParse(timeChoice, out int timeChoiceInt);
+                        if (validTime == false)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("<===============><===============>");
+                            Console.WriteLine("Please enter a valid number.");
+                            Console.WriteLine("<===============><===============>");
+                            Console.WriteLine();
+                        }
+                        else if (validTime == true && timeChoiceInt < 20)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("<===============><===============><===============><===============><===============><===============>");
+                            Console.WriteLine($"You selected {timeChoiceInt} seconds, which is not enough time to list. Please enter at least 20 seconds or more.");
+                            Console.WriteLine("<===============><===============><===============><===============><===============><===============>");
+                            Console.WriteLine();
+                        }
+                        else
+                        {
+                            time3 = timeChoiceInt;
+                            runListing = true;
+                        }
+                    }
+                    listing.RunListingActivity(time3);
                     break;
                 case 4:
                     Console.WriteLine();

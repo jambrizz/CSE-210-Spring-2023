@@ -22,11 +22,6 @@ public class Activity
         _activityTime = time;
     }
 
-    public Activity(string activityName)
-    {
-        _activityName = activityName;
-    }
-
     public Activity(int time)
     {
         _activityTime = time;
@@ -70,11 +65,6 @@ public class Activity
     public string DisplayEndingMessage()
     {
         return $"You have completed another {_activityTime} seconds of the {_activityName} Activity.";
-    }
-
-    public int GetActivityTime()
-    {
-        return _activityTime;
     }
 
     /******************************************************/

@@ -36,7 +36,6 @@ public class Breathing : Activity
         return _description;
     }
 
-    //TODO: Fix the method below to display the breathing exercise it currently does not display the messages
     public void DisplayBreathingExcercise(int time1, int time2)
     {
         SetActivityName("Breathing");
