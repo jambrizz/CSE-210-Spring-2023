@@ -9,4 +9,17 @@ public class Simple: Goal
     {
 
     }
+
+    public Simple(string name, string description, int points, string type): base(name, description, points, type)
+    {
+        _name = name;
+        _description = description;
+        _points = points;
+        _goalType = type;
+    }
+
+    public override string RecordGoal()
+    {
+        return $"GoalType:{_goalType}:[ ]| Name:{_name}| Description:({_description})| Points:{_points}| Status:False";
+    }
 }

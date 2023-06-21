@@ -5,8 +5,21 @@ using System.Text;
 
 public class Checklist: Goal
 {
+    private int _targetCount;
+    private int _bonusPoints;
+    
     public Checklist(string name): base(name)
     {
         
+    }
+
+    public Checklist(string name, string description, int points, int targetCount, int bonusPoints, string type): base(name, description, points, type)
+    {
+        _name = name;
+        _description = description;
+        _points = points;
+        _targetCount = targetCount;
+        _bonusPoints = bonusPoints;
+        _goalType = type;
     }
 }

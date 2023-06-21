@@ -9,12 +9,31 @@ public abstract class Goal
 
     protected string _name;
 
+    protected string _description;
+
     protected int _points;
+    protected string _goalType;
+
+    public Goal()
+    {
+
+    }
 
     public Goal(string name)
     {
         _name = name;
     }
 
-
+    public Goal(string name, string description, int points, string type)
+    {
+        _name = name;
+        _description = description;
+        _points = points;
+        _goalType = type;
+    }
+    
+    public virtual string RecordGoal()
+    {
+        return "";
+    }
 }

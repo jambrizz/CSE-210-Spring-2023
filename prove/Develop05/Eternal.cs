@@ -9,4 +9,12 @@ public class Eternal: Goal
     {
         
     }
+
+    public Eternal(string name, string description, int points, string type): base(name, description, points, type)
+    {
+        _name = name;
+        _description = description;
+        _points = points;
+        _goalType = type;
+    }
 }
