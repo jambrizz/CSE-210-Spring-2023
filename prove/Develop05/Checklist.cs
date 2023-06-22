@@ -22,4 +22,9 @@ public class Checklist: Goal
         _bonusPoints = bonusPoints;
         _goalType = type;
     }
+
+    public override string RecordGoal()
+    {
+        return $"GoalType:{_goalType}:[ ]| Name:{_name}| Description:({_description})| Tally: -- Currently completed| Numerator: 0| / |Denominator: {_targetCount}| Points:{_points}| Bonus: {_bonusPoints}| Status:False";
+    }
 }

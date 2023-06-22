@@ -17,4 +17,9 @@ public class Eternal: Goal
         _points = points;
         _goalType = type;
     }
+
+    public override string RecordGoal()
+    {
+        return $"GoalType:{_goalType}:[ ]| Name:{_name}| Description:({_description})| Points:{_points}| Status:False";
+    }
 }
