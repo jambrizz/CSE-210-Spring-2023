@@ -25,6 +25,6 @@ public class Checklist: Goal
 
     public override string RecordGoal()
     {
-        return $"GoalType:{_goalType}:[ ]| Name:{_name}| Description:({_description})| Tally: -- Currently completed| Numerator: 0| / |Denominator: {_targetCount}| Points:{_points}| Bonus: {_bonusPoints}| Status:False";
+        return $"GoalType:{_goalType}|Checkbox:[ ]| Name:{_name}| Description:({_description})| Tally: -- Currently completed| Numerator: 0| Denominator: {_targetCount}| Points:{_points}| Bonus: {_bonusPoints}| Status:False";
     }
 }

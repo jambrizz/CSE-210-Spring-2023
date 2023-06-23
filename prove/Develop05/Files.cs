@@ -13,6 +13,11 @@ public class Files
         _filename = filename;
     }
 
+    public Files()
+    {
+
+    }
+
     private void SetFilename(string filename)
     {
         _filename = filename;
@@ -23,9 +28,25 @@ public class Files
         return _filename;
     }
 
-    public void SaveGoals(string filename, List<Goal> list)
+    public bool FileAlreadyExists(string name)
     {
-        
+        return File.Exists(name);
+    }
+
+    public bool SaveGoals(List<string> list)
+    {
+        File.WriteAllLines(_filename, list);
+
+        if (FileAlreadyExists(_filename) == true)
+        {
+            Console.WriteLine("File was created successfully.");
+            Console.WriteLine();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void SaveToExistingFile(string filename, List<Goal> list)
@@ -35,7 +56,9 @@ public class Files
 
     public void LoadFile(string filename)
     {
-        
+        /////////////////////////////////////////////////////////////////////////////////////
+        //TODO: This is where I left off. I need to figure out how to load the file into the _goals list.
+        /////////////////////////////////////////////////////////////////////////////////////
     }
 
     public void DisplayMenuFile()

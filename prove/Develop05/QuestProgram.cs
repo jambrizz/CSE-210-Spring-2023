@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 public class QuestProgram
 {
@@ -40,8 +41,7 @@ public class QuestProgram
             _goals.Add(goal);
         }
     }
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //TODO: fix this to add the goal to the list. currently it does not save the goal after the method is done
+    
     public void CreateSimpleGoal(string name, string description, int points, string type)
     {
         Simple simple = new Simple(name, description, points, type);
@@ -57,7 +57,6 @@ public class QuestProgram
             _goals.Add(goal);
         }
         int length2 = _goals.Count;
-        //_goals.Add(simple);
     }
 
     private int GetScore()
@@ -74,17 +73,73 @@ public class QuestProgram
     {
         _score = number;
     }
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //TODO: finish this method below to split the goal and display it in a readable format to the user
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    private string GetGoalText(string goal)
+    
+    private string GoalText(string goal)
+    
     {
-        string line = goal;
-        //This is where I left off. I need to split the goal into its parts and display it in a readable format.
+        string goalType = goal.Split(":")[1];
+        goalType = goalType.Split("|")[0];
+        
+        if(goalType == "Simple")
+        {
+            string line = "";
+            string checkbox = goal.Split("Checkbox:")[1];
+            checkbox = checkbox.Split("|")[0];
+            line += checkbox;
+            string name = goal.Split("Name:")[1];
+            name = name.Split("|")[0];
+            line += " " + name;
+            string description = goal.Split("Description:")[1];
+            description = description.Split("|")[0];
+            line += " " + description;
+            
+            return line;
+        }
+        else if(goalType == "Eternal")
+        {
+            string line = "";
+            string checkbox = goal.Split("Checkbox:")[1];
+            checkbox = checkbox.Split("|")[0];
+            line += checkbox;
+            string name = goal.Split("Name:")[1];
+            name = name.Split("|")[0];
+            line += " " + name;
+            string description = goal.Split("Description:")[1];
+            description = description.Split("|")[0];
+            line += " " + description;
+            
+            return line;
+        }
+        else if(goalType == "Checklist")
+        {
+            string line = "";
+            string checkbox = goal.Split("Checkbox:")[1];
+            checkbox = checkbox.Split("|")[0];
+            line += checkbox;
+            string name = goal.Split("Name:")[1];
+            name = name.Split("|")[0];
+            line += " " + name;
+            string description = goal.Split("Description:")[1];
+            description = description.Split("|")[0];
+            line += " " + description;
+            string tally = goal.Split("Tally:")[1];
+            tally = tally.Split("|")[0];
+            line += " " + tally;
+            string numerator = goal.Split("Numerator:")[1];
+            numerator = numerator.Split("|")[0];    
+            line += " " + numerator + "/";
+            string denominator = goal.Split("Denominator:")[1];
+            denominator = denominator.Split("|")[0];
+            line += denominator;
 
-        //Dont forget to remove the "Parsed" part of the return statement. It is only there to make sure the method works.
-        return $"Parsed {line}";
-    }
+            return line;
+        }
+        else
+        {
+            return "Error displaying the goal";
+        }
+        
+   }
 
     public void GetScoreFromList()
     {
@@ -115,8 +170,10 @@ public class QuestProgram
             for(int i = 1; i < length; i++)
             {
                 string goal = _goals[i];
-                string line = GetGoalText(goal);
-                Console.WriteLine(line);
+                string line = GoalText(goal);
+                Console.Write($"{i}. ");
+                Console.Write(line);
+                Console.Write("\n");
             }
         }
     }
@@ -229,7 +286,6 @@ public class QuestProgram
                                 }
                                 else
                                 {
-                                    //points = userPointsInt;
                                     CreateSimpleGoal(name, description, userPointsInt, "Simple");
                                     validPoints = true;
                                 }
@@ -256,7 +312,6 @@ public class QuestProgram
                                 }
                                 else
                                 {
-                                    //points = userPointsInt;
                                     CreateEternalGoal(name, description, userPointsInt, "Eternal");
                                     validPoints2 = true;
                                 }
@@ -296,26 +351,83 @@ public class QuestProgram
                         default:
                         break;
                     }
-                    //Environment.Exit(0);
                 break;
                 case 2:
                     Console.Clear();
-                    //Console.WriteLine(GetLengthOfList());
                     DisplayGoals();
                     Console.WriteLine();
-                    //Environment.Exit(0);
                 break;
                 case 3:
-                    Console.Clear();
-                    Console.WriteLine("You have selected to save goals.");
-                    Console.WriteLine();
-                    Environment.Exit(0);
+                    int listLenght = GetLengthOfList();
+
+                    if(listLenght == 0)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("You have no goals to save. Please create some goals first then try again.");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        bool exists = true;
+                        while(exists == true)
+                        {
+                            Console.Write("What is the filename for the goal file. ");
+                            string fileInput = Console.ReadLine();
+                            string filenameToSave = fileInput + ".txt";
+
+                            Files f1 = new Files();
+                            bool fileToCheck = f1.FileAlreadyExists(filenameToSave);
+                        
+                            if (fileToCheck == true)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("That file already exists. Please try again.");
+                                Console.WriteLine();
+                            }
+                            else
+                            {
+                                Files f2 = new Files(filenameToSave);
+                                bool clearList = f2.SaveGoals(_goals);
+                                if(clearList == true)
+                                {
+                                    _goals.Clear();
+                                    exists = false;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("There was an error saving your goals. Please try again.");
+                                    Console.WriteLine();
+                                }
+                            }
+                        }
+                    }
                 break;
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //TODO: This is were I left off. I need to figure out how to load the file 
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 case 4:
                     Console.Clear();
-                    Console.WriteLine("You have selected to load goals.");
+                    Console.Write("What is the filename for the goal file. ");
+                    string nameInput = Console.ReadLine();
+                    string filenameToLoad = nameInput + ".txt";
+                    Files f3 = new Files();
+                    bool fileBool = f3.FileAlreadyExists(filenameToLoad);
+                    if(fileBool == false)
+                    {
+                        //TODO: test this
+                        Console.Clear();
+                        Console.WriteLine("That file does not exist. Please try again.");
+                        Console.WriteLine();
+                    }
+                    else
+                    {   
+                        //TODO: test this
+                        Files f4 = new Files(filenameToLoad);
+                        f4.LoadFile(filenameToLoad);
+                    }
                     Console.WriteLine();
-                    Environment.Exit(0);
+                    
                 break;
                 case 5:
                     Console.Clear();

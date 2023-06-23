@@ -1,0 +1,4 @@
+TotalScore:0
+GoalType:Simple|Checkbox:[ ]| Name:test1| Description:(this is a simple goal)| Points:10| Status:False
+GoalType:Eternal|Checkbox:[ ]| Name:test2| Description:(this is an eternal goal)| Points:10| Status:False
+GoalType:Checklist|Checkbox:[ ]| Name:test3| Description:(this is a checklist goal)| Tally: -- Currently completed| Numerator: 0| Denominator: 3| Points:10| Bonus: 100| Status:False
