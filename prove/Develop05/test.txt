@@ -1,5 +1,4 @@
-TotalScore:50
-GoalType:Simple|Checkbox:[ ]| Name:test1| Description:(this is a simple goal)| Points:10| Status:false
-GoalType:Eternal|Checkbox:[ ]| Name:test2| Description:(this is an eternal goal)| Points:20| Status:false
-GoalType:Checklist|Checkbox:[ ]| Name:test3| Description:(this is a checklist goal)| Tally: -- Currently completed| Numerator:0|Denominator:3| Points:30| Bonus: 100| Status:false
-GoalType:Simple|Checkbox:[ ]| Name:test4| Description:(This is to test overwriting an existing file.)| Points:50| Status:false
+TotalScore:0
+GoalType:Simple|Checkbox:[ ]| Name:Mow lawn| Description:(Mow the front and back lawns.)| Points:50| Status:false
+GoalType:Eternal|Checkbox:[ ]| Name:Read Scriptures| Description:(Read the scriptures for at least 15 minutes a day.)| Points:100| Status:false
+GoalType:Checklist|Checkbox:[ ]| Name:Go to the temple| Description:(Visit the temple at least once a month and do a session.)| Tally: -- Currently completed| Numerator:0| Denominator:12| Points:400| Bonus: 1000| Status:false

@@ -172,6 +172,7 @@ public class QuestProgram
         }
         else
         {  
+        
             Console.WriteLine("The following are your goals:");
             for(int i = 1; i < length; i++)
             {
@@ -698,10 +699,46 @@ public class QuestProgram
                     
                 break;
                 case 6:
-                    Console.WriteLine();
-                    Console.WriteLine("Thank you for using the Eternal Quest Program! See you next time!");
-                    Console.WriteLine();
-                    Environment.Exit(0);
+                    Console.Clear();
+                    int length = GetLengthOfList();
+
+                    if(length > 0)
+                    {
+                        bool leave = false;
+                        while(leave == false)
+                        {
+                            Console.WriteLine("You have unsaved goals. Would you like to save them? (Y/N) ");
+                            string saveInput = Console.ReadLine();
+                            if(saveInput == "Y" || saveInput == "y")
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Please select menu option 3 to save your goals.");
+                                Console.WriteLine();
+                                leave = true;
+                            }
+                            else if(saveInput == "N" || saveInput == "n")
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Thank you for using the Eternal Quest Program! See you next time!");
+                                Console.WriteLine();
+                                leave = true;
+                                Environment.Exit(0);
+                            }
+                            else
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Invalid choice. Please try again.");
+                                Console.WriteLine();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Thank you for using the Eternal Quest Program! See you next time!");
+                        Console.WriteLine();
+                        runProgram = false;
+                    }
                 break;
                 default:
                 break;
