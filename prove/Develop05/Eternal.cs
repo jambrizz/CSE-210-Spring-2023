@@ -20,6 +20,6 @@ public class Eternal: Goal
 
     public override string RecordGoal()
     {
-        return $"GoalType:{_goalType}|Checkbox:[ ]| Name:{_name}| Description:({_description})| Points:{_points}| Status:False";
+        return $"GoalType:{_goalType}|Checkbox:[ ]| Name:{_name}| Description:({_description})| Points:{_points}| Status:false";
     }
 }

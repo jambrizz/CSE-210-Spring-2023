@@ -54,11 +54,15 @@ public class Files
         
     }
 
-    public void LoadFile(string filename)
+    public void LoadFile(string filename, List<string> list)
     {
-        /////////////////////////////////////////////////////////////////////////////////////
-        //TODO: This is where I left off. I need to figure out how to load the file into the _goals list.
-        /////////////////////////////////////////////////////////////////////////////////////
+        Console.Clear();
+        string[] lines = File.ReadAllLines(filename);
+        foreach (string line in lines)
+        {
+            list.Add(line);
+        }
+        
     }
 
     public void DisplayMenuFile()

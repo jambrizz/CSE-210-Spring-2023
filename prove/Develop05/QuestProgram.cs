@@ -61,7 +61,28 @@ public class QuestProgram
 
     private int GetScore()
     {
-        return _score;
+        if(_goals.Count == 0)
+        {
+            SetScore(0);
+            return 0;
+        }
+        else
+        {
+            string line = _goals[0];
+            string[] splitLine = line.Split(":");
+            string score = splitLine[1];
+            bool number = int.TryParse(score, out int scoreInt);
+            if(number == true)
+            {
+                SetScore(scoreInt);
+                return scoreInt;
+            }
+            else
+            {
+                Console.WriteLine("There was an error extracting the score.");
+                return 0;
+            }
+        }
     }
 
     private int GetLengthOfList()
@@ -140,25 +161,10 @@ public class QuestProgram
         }
         
    }
-
-    public void GetScoreFromList()
-    {
-        string line = _goals[0];
-        string[] splitLine = line.Split(":");
-        string score = splitLine[1];
-        bool number = int.TryParse(score, out int scoreInt);
-        if(number == true)
-        {
-            SetScore(scoreInt);
-        }
-        else
-        {
-            Console.WriteLine("There was an error extracting the score.");
-        }
-    }
     
     private void DisplayGoals()
     {
+        Console.Clear();
         int length = GetLengthOfList();
         if(length == 0)
         {
@@ -186,7 +192,191 @@ public class QuestProgram
 
     public void RecordEvent(int number)
     {
+        string newLine = "";
+        string goal = _goals[number];
+        
+        string status = goal.Split("Status:")[1];
+        
+        if(status == "true")
+        {
+            Console.WriteLine("You have already completed this goal.");
+        }
+        else
+        {
+            string goalType = goal.Split(":")[1];
+            string type = goalType.Split("|")[0];
+            
+            if(type == "Simple")
+            {
+                string newGoalType = goal.Split("|")[0];
+                newLine += newGoalType + "|" + "Checkbox:[X]|";
+                
+                string name = goal.Split("Name:")[1];
+                string newName = name.Split("|")[0];
+                newLine += " Name:" + newName + "|";
 
+                string description = goal.Split("Description:")[1];
+                string newDescription = description.Split("|")[0];
+                newLine += " Description:" + newDescription + "|";
+
+                string points = goal.Split("Points:")[1];
+                string newPoints = points.Split("|")[0];
+                newLine += " Points:" + newPoints + "|";
+
+                newLine += " Status:true";
+                
+                int pointsToAdd = int.Parse(newPoints);
+                UpdateScore(pointsToAdd);
+                Console.WriteLine("Congratulations! You have completed your goal! You have earned " + pointsToAdd + " points.");
+                Console.WriteLine();
+                _goals.RemoveAt(number);
+                _goals.Insert(number, newLine);
+            }
+            else if(type == "Eternal")
+            {
+                string newGoalType = goal.Split("|")[0];
+                newLine += newGoalType + "|" + "Checkbox:[ ]|";
+                
+                string name = goal.Split("Name:")[1];
+                string newName = name.Split("|")[0];
+                newLine += " Name:" + newName + "|";
+
+                string description = goal.Split("Description:")[1];
+                string newDescription = description.Split("|")[0];
+                newLine += " Description:" + newDescription + "|";
+
+                string points = goal.Split("Points:")[1];
+                string newPoints = points.Split("|")[0];
+                newLine += " Points:" + newPoints + "|";
+
+                newLine += " Status:false";
+                
+                int pointsToAdd = int.Parse(newPoints);
+                UpdateScore(pointsToAdd);
+                Console.WriteLine("Congratulations! You have completed your goal! You have earned " + pointsToAdd + " points.");
+                Console.WriteLine();
+                _goals.RemoveAt(number);
+                _goals.Insert(number, newLine);
+            }
+            else if(type == "Checklist")
+            {
+                string numerator = goal.Split("Numerator:")[1];
+                string newNumerator = numerator.Split("|")[0];
+                int numeratorInt = int.Parse(newNumerator);
+                numeratorInt++;
+
+                string denominator = goal.Split("Denominator:")[1];
+                string newDenominator = denominator.Split("|")[0];
+                int denominatorInt = int.Parse(newDenominator);
+
+                if(numeratorInt == denominatorInt)
+                {
+                    string newGoalType = goal.Split("|")[0];
+                    newLine += newGoalType + "|" + "Checkbox:[X]|";
+                    
+                    string name = goal.Split("Name:")[1];
+                    string newName = name.Split("|")[0];
+                    newLine += " Name:" + newName + "|";
+
+                    string description = goal.Split("Description:")[1];
+                    string newDescription = description.Split("|")[0];
+                    newLine += " Description:" + newDescription + "|";
+
+                    string tally = goal.Split("Tally:")[1];
+                    string newTally = tally.Split("|")[0];
+                    newLine += " Tally:" + newTally + "|";
+
+                    string newNumeratorString = " Numerator:" + numeratorInt + "|";
+                    newLine += newNumeratorString;
+
+                    string newDenominatorString = "Denominator:" + denominatorInt + "|";
+                    newLine += newDenominatorString;
+
+                    string points = goal.Split("Points:")[1];
+                    string newPoints = points.Split("|")[0];
+                    newLine += " Points:" + newPoints + "|";
+
+                    string bonus = goal.Split("Bonus:")[1];
+                    string newBonus = bonus.Split("|")[0];
+                    newLine += " Bonus:" + newBonus + "|";
+
+                    newLine += " Status:true";
+                    
+                    int pointsToAdd = int.Parse(newPoints);
+                    int bonusToAdd = int.Parse(newBonus);
+                    int totalPoints = pointsToAdd + bonusToAdd;
+                    UpdateScore(totalPoints);
+                    Console.WriteLine("Congratulations! You have completed your goal! You have earned " + pointsToAdd + " points." + " You have also earned a bonus of " + newBonus + " points.");
+                    Console.WriteLine();
+                    _goals.RemoveAt(number);
+                    _goals.Insert(number, newLine);
+                }
+                else
+                {
+                    string newGoalType = goal.Split("|")[0];
+                    newLine += newGoalType + "|" + "Checkbox:[ ]|";
+                    
+                    string name = goal.Split("Name:")[1];
+                    string newName = name.Split("|")[0];
+                    newLine += " Name:" + newName + "|";
+
+                    string description = goal.Split("Description:")[1];
+                    string newDescription = description.Split("|")[0];
+                    newLine += " Description:" + newDescription + "|";
+
+                    string tally = goal.Split("Tally:")[1];
+                    string newTally = tally.Split("|")[0];
+                    newLine += " Tally:" + newTally + "|";
+
+                    string newNumeratorString = " Numerator:" + numeratorInt + "|";
+                    newLine += newNumeratorString;
+
+                    string newDenominatorString = "Denominator:" + denominatorInt + "|";
+                    newLine += newDenominatorString;
+
+
+                    string points = goal.Split("Points:")[1];
+                    string newPoints = points.Split("|")[0];
+                    newLine += " Points:" + newPoints + "|";
+
+                    string bonus = goal.Split("Bonus:")[1];
+                    string newBonus = bonus.Split("|")[0];
+                    newLine += " Bonus:" + newBonus + "|";
+
+                    newLine += " Status:false";
+                    
+                    int pointsToAdd = int.Parse(newPoints);
+                    UpdateScore(pointsToAdd);
+                    Console.WriteLine("Congratulations! You have completed your goal! You have earned " + pointsToAdd + " points.");
+                    Console.WriteLine();
+                    _goals.RemoveAt(number);
+                    _goals.Insert(number, newLine);
+                }
+            }
+            else
+            {
+                Console.WriteLine("There was an error recording your goal.");
+            }
+        }
+    }
+
+    public void UpdateScore(int number)
+    {
+        string scoreFromList = _goals[0];
+        string[] splitLine = scoreFromList.Split(":");
+        string score = splitLine[1];
+        bool scoreBool = int.TryParse(score, out int scoreInt);
+        if(scoreBool == true)
+        {
+            int newScore = scoreInt + number;
+            string newScoreString = "TotalScore:" + newScore;
+            _goals.RemoveAt(0);
+            _goals.Insert(0, newScoreString);
+        }
+        else
+        {
+            Console.WriteLine("There was an error updating your score.");
+        }
     }
 
     public void QuestApp()
@@ -267,7 +457,6 @@ public class QuestProgram
                     {
                         case 1:
                             Console.Clear();
-                            //int points = 0;
                             bool validPoints = false;
                             while(validPoints == false)
                             {
@@ -358,6 +547,7 @@ public class QuestProgram
                     Console.WriteLine();
                 break;
                 case 3:
+                    Console.Clear();
                     int listLenght = GetLengthOfList();
 
                     if(listLenght == 0)
@@ -384,6 +574,41 @@ public class QuestProgram
                                 Console.Clear();
                                 Console.WriteLine("That file already exists. Please try again.");
                                 Console.WriteLine();
+                                bool overwrite = false;
+                                while(overwrite == false)
+                                {
+                                    Console.WriteLine("Would you like to overwrite the file? (Y/N) ");
+                                    string overwriteInput = Console.ReadLine();
+                                    if(overwriteInput == "Y" || overwriteInput == "y")
+                                    {
+                                        Files f2 = new Files(filenameToSave);
+                                        bool clearList = f2.SaveGoals(_goals);
+                                        if(clearList == true)
+                                        {
+                                            _goals.Clear();
+                                            exists = false;
+                                            overwrite = true;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("There was an error saving your goals. Please try again.");
+                                            Console.WriteLine();
+                                        }
+                                    }
+                                    else if(overwriteInput == "N" || overwriteInput == "n")
+                                    {
+                                        Console.Clear();
+                                        Console.WriteLine("Please enter a new filename.");
+                                        Console.WriteLine();
+                                        overwrite = true;
+                                    }
+                                    else
+                                    {
+                                        Console.Clear();
+                                        Console.WriteLine("Invalid choice. Please try again.");
+                                        Console.WriteLine();
+                                    }
+                                }
                             }
                             else
                             {
@@ -403,9 +628,6 @@ public class QuestProgram
                         }
                     }
                 break;
-                ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                //TODO: This is were I left off. I need to figure out how to load the file 
-                ////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 case 4:
                     Console.Clear();
                     Console.Write("What is the filename for the goal file. ");
@@ -415,25 +637,65 @@ public class QuestProgram
                     bool fileBool = f3.FileAlreadyExists(filenameToLoad);
                     if(fileBool == false)
                     {
-                        //TODO: test this
                         Console.Clear();
-                        Console.WriteLine("That file does not exist. Please try again.");
+                        Console.WriteLine("That file does not exist. Please try again. Do not include the .txt extension at the end.");
                         Console.WriteLine();
                     }
                     else
                     {   
-                        //TODO: test this
+                        Console.Clear();
                         Files f4 = new Files(filenameToLoad);
-                        f4.LoadFile(filenameToLoad);
+                        f4.LoadFile(filenameToLoad, _goals);
                     }
                     Console.WriteLine();
                     
                 break;
                 case 5:
                     Console.Clear();
-                    Console.WriteLine("You have selected to record an event.");
-                    Console.WriteLine();
-                    Environment.Exit(0);
+                    int lenght = GetLengthOfList();
+
+                    if(lenght == 0)
+                    {
+                        Console.WriteLine("You have no goals to record. Please create some goals first then try again.");
+                    }
+                    else
+                    {
+                        int eventSelection = 0;
+                        bool validEventChoice = false;
+                        while(validEventChoice == false)
+                        {
+                            Console.WriteLine("Record a goal from the following list.");
+                            Console.WriteLine();
+                            DisplayGoals();
+                            Console.WriteLine();
+                            Console.Write("Please enter the number of the goal you accomplished. ");
+                            string goalNumber = Console.ReadLine();
+                            bool goalNumberBool = int.TryParse(goalNumber, out int goalNumberInt);
+
+                            if(goalNumberBool == false)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Please enter a number and try again.");
+                                Console.WriteLine();
+                            }
+                            else if(goalNumberBool == true && goalNumberInt > GetLengthOfList() -1  || goalNumberBool == true && goalNumberInt < 1)
+                            {
+                                Console.Clear();
+                                Console.WriteLine($"You entered {goalNumberInt}, which is not a valid selection. Please try again.");
+                                Console.WriteLine();
+                            }
+                            else
+                            {
+                                Console.Clear();
+                                eventSelection = goalNumberInt;
+                                validEventChoice = true;
+                            }
+                        }
+                        Console.WriteLine();
+                        RecordEvent(eventSelection);
+                    }
+                    
+                    
                 break;
                 case 6:
                     Console.WriteLine();
