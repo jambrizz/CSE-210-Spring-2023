@@ -15,7 +15,12 @@ public class Quest
 
     public void QuestApp()
     {
-
+        DisplayHelper dh = new DisplayHelper();
+        dh.DisplayTitle();
+        Animations anim = new Animations();
+        anim.Spinner();
+        Console.Clear();
+        dh.DisplayMenu();
     }
 
     public string DisplayHeroStats()
