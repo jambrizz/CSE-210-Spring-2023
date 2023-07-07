@@ -28,6 +28,11 @@ public abstract class Character
         _armor = armor;
    }
 
+   public Character()
+   {
+    
+   }
+
    public virtual string HeroStats()
     {
         return "";
@@ -43,4 +48,13 @@ public abstract class Character
         _armor = armor;
     }
      
+    public int GetHealth()
+    {
+       return _health;
+    }
+
+    public int GetArmor()
+    {
+        return _armor;
+    }
 }

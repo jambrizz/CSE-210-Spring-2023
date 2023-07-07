@@ -13,13 +13,24 @@ public class Elf: Character
     {
         _heroType = "Elf";
         _health = 100;
-        _armor = 100;
+        _armor = 75;
         _weaponType = "Goblin Cleaver";
         _weaponPower = 35;
     }
 
+    public Elf(int health, int armor) : base(health, armor)
+    {
+        _health = health;
+        _armor = armor;
+    }
+
+    public Elf() : base()
+    {
+    
+    }
+
     public override string HeroStats()
     {
-        return "Hero Type: " + _heroType + "\nHealth: " + _health + "\nArmor: " + _armor + "\nWeapon: " + _weaponType + "\nWeapon Power: " + _weaponPower + "\nBow: " + elfBow + "\nBow Power: " + elfBowPower;
+        return "Hero Type: " + _heroType + "\nHealth: " + _health + "\nArmor: " + _armor + "\nWeapon: " + _weaponType + "\nWeapon Power: " + _weaponPower + "\nBonus: " + elfBow + "\nBonus Power: " + elfBowPower;
     }
 }

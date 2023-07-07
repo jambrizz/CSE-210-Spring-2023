@@ -13,13 +13,13 @@ public class Wizard: Character
     {
         _heroType = "Wizard";
         _health = 100;
-        _armor = 100;
+        _armor = 50;
         _weaponType = "Short Sword";
         _weaponPower = 25;
     }  
 
     public override string HeroStats()
     {
-        return "Hero Type: " + _heroType + "\nHealth: " + _health + "\nArmor: " + _armor + "\nWeapon: " + _weaponType + "\nWeapon Power: " + _weaponPower + "\nStaff: " + wizardStaff + "\nStaff Power: " + wizardStaffPower;
+        return "Hero Type: " + _heroType + "\nHealth: " + _health + "\nArmor: " + _armor + "\nWeapon: " + _weaponType + "\nWeapon Power: " + _weaponPower + "\nBonus: " + wizardStaff + "\nBonus Power: " + wizardStaffPower;
     }
 }

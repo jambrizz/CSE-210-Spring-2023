@@ -18,8 +18,25 @@ public class Paladin: Character
         _weaponPower = 45;
     }
 
+    public Paladin(int health, int armor, int shield) : base(health, armor)
+    {
+        _health = health;
+        _armor = armor;
+        paladinShieldPower = shield;
+    }
+
+    public Paladin() : base()
+    {
+    
+    }
+
+    public int GetShieldPower()
+    {
+        return paladinShieldPower;
+    }
+
     public override string HeroStats()
     {
-        return "Hero Type: " + _heroType + "\nHealth: " + _health + "\nArmor: " + _armor + "\nWeapon: " + _weaponType + "\nWeapon Power: " + _weaponPower + "\nShield: " + paladinShield + "\nShield Power: " + paladinShieldPower;
+        return "Hero Type: " + _heroType + "\nHealth: " + _health + "\nArmor: " + _armor + "\nWeapon: " + _weaponType + "\nWeapon Power: " + _weaponPower + "\nBonus: " + paladinShield + "\nBonus Power: " + paladinShieldPower;
     }
 }

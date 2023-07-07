@@ -50,6 +50,20 @@ public class Animations
         CursorVisible = true;
     }
 
+    //May not need this
+    public void SpinnerInGame()
+    {
+        CursorVisible = false;
+        foreach (string item in _spinnerAnimation)
+        {
+            Console.Write(item);
+            Thread.Sleep(250);
+            Console.Write("\b \b");
+        }
+        Console.WriteLine();
+        CursorVisible = true;
+    }
+
     public void MonsterAnimation()
     {
 
