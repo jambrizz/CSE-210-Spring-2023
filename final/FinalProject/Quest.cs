@@ -69,6 +69,11 @@ public class Quest
                 //TODO: This is where you left off add a select path method
                 //////////////////////////////////////////////////
 
+
+                //////////////////////////////////////////////
+                //TODO: Create a switch to decide if combat continues or to display a hero dead message or monster dead message
+                //////////////////////////////////////////////
+
                 //Console.WriteLine();
                 //Console.WriteLine($"Health: {p.GetHealth()}");
                 //Console.WriteLine($"Armor: {p.GetArmor()}");

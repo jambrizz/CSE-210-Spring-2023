@@ -7,7 +7,21 @@ public class Elf: Character
 {
     private string elfBow = "Bow of the Forest";
 
-    private int elfBowPower = 35;
+    private int elfBowPower = 55;
+
+    private List<string> _elfMessages = new List<string>()
+    {
+        "You jump out of the way!",
+        "You dodge the attack!",
+        "You block the attack!",
+        "You take the hit!",
+        "You take a critical hit!",
+        "You take a glancing blow!",
+        "You landed a critical hit with the Bow of the Forest!",
+        "You landed a glancing blow!",
+        "You landed a solid hit with the Goblin Cleaver!",
+        "You missed!"
+    };
 
     public Elf(int selection) : base(selection)
     {

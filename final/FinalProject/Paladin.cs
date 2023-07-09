@@ -9,6 +9,20 @@ public class Paladin: Character
 
     private int paladinShieldPower = 50;
 
+    private List<string> _paladinMessages = new List<string>()
+    {
+        "You jump out of the way!",
+        "You dodge the attack!",
+        "You block the attack!",
+        "You take the hit!",
+        "You take a critical hit!",
+        "You take a glancing blow!",
+        "You landed a critical hit with your Mace!",
+        "You landed a glancing blow!",
+        "You landed a solid hit with your Mace!",
+        "You missed!"
+    };
+
     public Paladin(int selection) : base(selection)
     {
         _heroType = "Paladin";
