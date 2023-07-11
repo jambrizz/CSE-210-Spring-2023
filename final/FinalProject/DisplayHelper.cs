@@ -59,4 +59,14 @@ public class DisplayHelper
             Console.Clear();
         }
     }
+
+    public void DisplayTextFile(string file)
+    {
+        string[] lines = File.ReadAllLines(file);
+        foreach (string line in lines)
+        {
+            Console.WriteLine(line);
+        }
+        Console.WriteLine();
+    }
 }

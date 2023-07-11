@@ -44,9 +44,14 @@ public class Paladin: Character
     
     }
 
-    public int GetShieldPower()
+    public override int GetShieldPower()
     {
         return paladinShieldPower;
+    }
+
+    protected override void SetShieldPower(int number)
+    {
+        paladinShieldPower = number;
     }
 
     public override string HeroStats()
