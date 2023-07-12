@@ -53,8 +53,6 @@ public class Quest
             case 1:
                 Console.Clear();
                 Console.WriteLine("You have selected the Paladin as your character.");
-                //Paladin p = new Paladin(1);
-                //string stats1 = p.HeroStats();
                 Character p = new Paladin(1);
                 string stats1 = p.HeroStats();
                 Console.WriteLine();
@@ -99,21 +97,20 @@ public class Quest
                 {
                     case 1:
                         Console.Clear();
+                        Character p1 = new Paladin(1);
+                        int playershield = p1.GetShieldPower();
+                        int playerArmor = p1.GetArmor();
+                        int playerHealth = p1.GetHealth();
+                        int playerAttack = p1.GetWeaponPower();
                         River r = new River();
                         r.RiverStory(0, 3);
 
                         bool riverCombat = true;
                         while(riverCombat == true)
                         {
-                            Character p1 = new Paladin(1);
-
                             int enemyHealth = r.GetRiverBanditsHealth();
                             int enemyAttack = r.GetRiverBanditsAttack();
-                            int playershield = p1.GetShieldPower();
-                            int playerArmor = p1.GetArmor();
-                            int playerHealth = p1.GetHealth();
-                            int playerAttack = p1.GetWeaponPower();
-                            
+                                                        
                             Console.Clear();
                             Console.WriteLine($"Your Stats\nHealth: {playerHealth}\nArmor: {playerArmor}\nShield: {playershield}");
                             Console.WriteLine();
@@ -158,6 +155,7 @@ public class Quest
                                     enemyHealth = 0;
                                     riverCombat = false;
                                 }
+                                
                                 r.SetRiverBanditsHealth(enemyHealth);
                                 Console.WriteLine("You landed a fatal hit!");
                                 Console.WriteLine();
@@ -183,21 +181,60 @@ public class Quest
                                 {
                                     if(playershield > 0)
                                     {
-                                        //////////////////////////////////////////
-                                        //TODO: This is where I left off. Need to figure out how to get the player shield to go down it currently doesn't change when he gets hit.
-                                        //////////////////////////////////////////
                                         playershield -= enemyAttack;
-                                        p1.CombatDamage("shield", enemyAttack);
+                                        
+                                        if(playershield == 0)
+                                        {
+                                            p1.CombatDamage("shield", playershield);
+                                        }
+                                        else if(playershield < 0)
+                                        {
+                                            playershield = 0;
+                                            p1.CombatDamage("shield", playershield);
+                                        }
+                                        else
+                                        {
+                                            p1.CombatDamage("shield", playershield);
+                                        }
                                     }
                                     else if(playerArmor > 0)
                                     {
                                         playerArmor -= enemyAttack;
-                                        p1.CombatDamage("armor", enemyAttack);
+                                        
+                                        if(playerArmor == 0)
+                                        {
+                                            p1.CombatDamage("armor", playerArmor);
+                                        }
+                                        else if(playerArmor < 0)
+                                        {
+                                            playerArmor = 0;
+                                            p1.CombatDamage("armor", 0);
+                                        }
+                                        else 
+                                        {
+                                            p1.CombatDamage("armor", playerArmor);
+                                        }
                                     }
                                     else
                                     {
                                         playerHealth -= enemyAttack;
-                                        p1.CombatDamage("health", enemyAttack);
+                                        if(playerHealth == 0)
+                                        {
+                                            p1.CombatDamage("health", playerHealth);
+                                            HeroDefeated();
+                                            riverCombat = false;
+                                        }
+                                        else if(playerHealth < 0)
+                                        {
+                                            playerHealth = 0;
+                                            p1.CombatDamage("health", playerHealth);
+                                            HeroDefeated();
+                                            riverCombat = false;
+                                        }
+                                        else
+                                        {
+                                            p1.CombatDamage("health", playerHealth);
+                                        }
                                     }
                                     Console.WriteLine("The bandit landed a hit!");
                                     Console.WriteLine();
@@ -207,10 +244,64 @@ public class Quest
                             }
                             
                         }
+                        Console.Clear();
+                        Console.WriteLine("You have won!");
+                        Console.WriteLine();
+                        Console.WriteLine($"Your updated Stats are\nHealth: {playerHealth}\nArmor: {playerArmor}\nShield: {playershield}");
+                        Console.WriteLine();
+                        Console.WriteLine("Press any key to continue the story...");
+                        Console.ReadKey();
 
-                        //////////////////////////////////////////////////////////////////
-                        //TODO: continue the story here
-                        //////////////////////////////////////////////////////////////////
+                        r.RiverStory(4, 7); 
+
+                        bool sphinxQuestions = true;
+                        while(sphinxQuestions == true)
+                        {
+                            Console.WriteLine();    
+                            Console.WriteLine("Do you wish to answer the sphinx's questions?"); 
+                            Console.WriteLine("1. Yes");
+                            Console.WriteLine("2. No");
+                            Console.Write("Enter your selection: ");
+                            string input1 = Console.ReadLine();
+                            bool validInput1 = int.TryParse(input1, out int sphinxSelect);
+                            
+                            if(validInput1 == false)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Invalid input. Please enter a number and try again.");
+                                Console.WriteLine();
+                            }
+                            else if(validInput1 == true && sphinxSelect < 1 || validInput1 == true && sphinxSelect > 2)
+                            {
+                                Console.Clear();
+                                Console.WriteLine($"You entered {sphinxSelect}. Please enter a number between 1 and 2 and try again.");
+                                Console.WriteLine();
+                            }
+                            else if(validInput1 == true && sphinxSelect > 0 && sphinxSelect < 3)
+                            {
+                                /////////////////////////////////////////////////////
+                                //TODO: This is where I left off and in the Journey class under the SphinxRiddle method
+                                /////////////////////////////////////////////////////
+                                if(sphinxSelect == 1)
+                                {
+                                    Console.Clear();
+                                    Console.WriteLine("You have chosen to answer the sphinx's questions.");
+                                    Console.WriteLine();
+                                    Console.WriteLine("Press any key to continue...");
+                                    Console.ReadKey();
+                                    sphinxQuestions = false;
+                                }
+                                else if(sphinxSelect == 2)
+                                {
+                                    Console.Clear();
+                                    Console.WriteLine("You have chosen not to answer the sphinx's questions.");
+                                    Console.WriteLine();
+                                    Console.WriteLine("Press any key to continue...");
+                                    Console.ReadKey();
+                                    sphinxQuestions = false;
+                                }
+                            }
+                        }                
                         
                         break;
                     case 2:
@@ -289,16 +380,23 @@ public class Quest
         return number;
     }
 
-    public bool HeroDefeated()
+    public void HeroDefeated()
     {
-        // TODO replace this with a real implementation
-        return false;
+        Console.Clear();
+        Console.WriteLine("You have been defeated!");
+        Console.WriteLine();
+        Environment.Exit(0);
     }
 
-    public bool MonsterDefeated()
+    public void MonsterDefeated()
     {
-        // TODO replace this with a real implementation
-        return false;
+        Console.Clear();
+        Console.WriteLine("Congratulations!");
+        Console.WriteLine();
+        Console.WriteLine("You have defeated the monster!");
+        Console.WriteLine();
+        Console.WriteLine("Treasure awaits you at the end of the path!");
+        Environment.Exit(0);
     }
 
     public bool PathComplete()

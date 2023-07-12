@@ -7,7 +7,7 @@ public class Paladin: Character
 {
     private string paladinShield = "Shield of the Righteous";
 
-    private int paladinShieldPower = 50;
+    protected int paladinShieldPower = 50;
 
     private List<string> _paladinMessages = new List<string>()
     {
@@ -49,7 +49,7 @@ public class Paladin: Character
         return paladinShieldPower;
     }
 
-    protected override void SetShieldPower(int number)
+    public override void SetShieldPower(int number)
     {
         paladinShieldPower = number;
     }

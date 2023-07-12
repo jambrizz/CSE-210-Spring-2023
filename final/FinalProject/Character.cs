@@ -67,21 +67,22 @@ public abstract class Character
     {
         return 0;
     }
-
-    protected virtual void SetShieldPower(int number)
+    
+    public virtual void SetShieldPower(int number)
     {
         
     }
+    
 
     public void CombatDamage(string type, int number)
     {
         if (type == "health")
         {
-            _health -= number;
+            SetHealth(number);
         }
         else if (type == "armor")
         {
-            _armor -= number;
+            SetArmor(number);
         }
         else if (type == "shield")
         {
