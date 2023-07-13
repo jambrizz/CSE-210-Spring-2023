@@ -53,79 +53,91 @@ public class Journey
         25
     };
 
-    public void SphinxRiddle()
+    public string GetSphinxRiddle(int number)
     {
-        Random r = new Random();
-        int number = r.Next(0, 2);
-        Console.WriteLine(_sphinxRiddles[number]);
-        Console.WriteLine();
+        //Console.Clear();
+        string riddle = _sphinxRiddles[number];
+        return riddle;
+    }
 
+    public void GetSphinxOptions(int number)
+    {
         if(number == 0)
         {
-            int selection = 0;
-            bool runRiddle = true;
-            while(runRiddle == true)
+            Console.WriteLine();
+            int count = 1;
+            foreach(string option in _sphinxRiddle1)
             {
-                Console.WriteLine("1. " + _sphinxRiddle1[0]);
-                Console.WriteLine("2. " + _sphinxRiddle1[1]);
-                Console.WriteLine("3. " + _sphinxRiddle1[2]);
-                Console.WriteLine();
-                Console.WriteLine("Enter your answer: ");
-                string answer = Console.ReadLine();
-
-                bool isNumber = int.TryParse(answer, out int numberAnswer);
-                if(isNumber == false)
-                {
-                    Console.Clear();
-                    Console.WriteLine("Please enter a number");
-                    Console.WriteLine();
-                }
-                else if(isNumber == true && numberAnswer < 1 || isNumber == true && numberAnswer > 3)
-                {
-                    Console.Clear();
-                    Console.WriteLine($"You entered {numberAnswer}. Please enter a number between 1 and 3");
-                    Console.WriteLine();
-                }
-                else
-                {
-                    runRiddle = false;
-                    selection = numberAnswer - 1;
-                }
+                Console.WriteLine(count + ". " + option);
+                count++;
             }
-            ///////////////////////////////////////////////////
-            //TODO: This is where I left off. Finish the if statements for the riddle bellow and then add the code for other two riddles.
-            ///////////////////////////////////////////////////
-            if(selection == 1)
-            {
-                //TODO: Test this code
-                Console.Clear();
-                Console.WriteLine(_sphinxRiddle1[selection] + " is the correct answer!");
-            }
-            else
-            {
-                //TODO: Test this code
-                Console.Clear();
-                Console.WriteLine(_sphinxRiddle1[selection] + " is the wrong answer!");
-            }
-
         }
         else if(number == 1)
         {
-            Console.WriteLine("1. " + _sphinxRiddle2[0]);
-            Console.WriteLine("2. " + _sphinxRiddle2[1]);
-            Console.WriteLine("3. " + _sphinxRiddle2[2]);
+            Console.WriteLine();
+            int count = 1;
+            foreach(string option in _sphinxRiddle2)
+            {
+                Console.WriteLine(count + ". " + option);
+                count++;
+            }
         }
         else if (number == 2)
         {
-            Console.WriteLine("1. " + _sphinxRiddle3[0]);
-            Console.WriteLine("2. " + _sphinxRiddle3[1]);
-            Console.WriteLine("3. " + _sphinxRiddle3[2]);
+            Console.WriteLine();
+            int count = 1;
+            foreach (string option in _sphinxRiddle3)
+            {
+                Console.WriteLine(count + ". " + option);
+                count++;
+            }
 
         }
-        
     }
 
-    
+    public bool CheckAnswer(int riddle, int selection)
+    {
+        int answer = selection - 1;
+        bool check;
+        if(riddle == 0)
+        {
+            if(answer == 1)
+            {
+                check = true;
+            }
+            else
+            {
+                check = false;
+            }
+        }
+        else if(riddle == 1)
+        {
+            if(answer == 0)
+            {
+                check = true;
+            }
+            else
+            {
+                check = false;
+            }
+        }
+        else if(riddle == 2)
+        {
+            if(answer == 1)
+            {
+                check = true;
+            }
+            else
+            {
+                check = false;
+            }
+        }
+        else
+        {
+            check = false;
+        }
+        return check;
+    }
 
     
 }

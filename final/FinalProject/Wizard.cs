@@ -32,6 +32,11 @@ public class Wizard: Character
         _weaponPower = 25;
     }  
 
+    public Wizard() : base()
+    {
+    
+    }
+
     public override string HeroStats()
     {
         return "Hero Type: " + _heroType + "\nHealth: " + _health + "\nArmor: " + _armor + "\nWeapon: " + _weaponType + "\nWeapon Power: " + _weaponPower + "\nBonus: " + wizardStaff + "\nBonus Power: " + wizardStaffPower;

@@ -279,9 +279,7 @@ public class Quest
                             }
                             else if(validInput1 == true && sphinxSelect > 0 && sphinxSelect < 3)
                             {
-                                /////////////////////////////////////////////////////
-                                //TODO: This is where I left off and in the Journey class under the SphinxRiddle method
-                                /////////////////////////////////////////////////////
+                                
                                 if(sphinxSelect == 1)
                                 {
                                     Console.Clear();
@@ -289,6 +287,122 @@ public class Quest
                                     Console.WriteLine();
                                     Console.WriteLine("Press any key to continue...");
                                     Console.ReadKey();
+                                    Console.Clear();
+                                    Random rn = new Random();
+                                    int number = rn.Next(0, 2);
+
+                                    bool runSphinx = true;
+                                    while(runSphinx == true)
+                                    {
+                                        //string riddle = r.GetSphinxRiddle(number);
+                                        string test = r.GetSphinxRiddle(0);
+                                        Console.WriteLine(test);
+                                        r.GetSphinxOptions(0);
+                                        Console.WriteLine();
+                                        Console.Write("Enter your selection: ");
+                                        string input2 = Console.ReadLine();
+                                        bool validInput2 = int.TryParse(input2, out int sphinxAnswer);
+                                        
+                                        if(validInput2 == false)
+                                        {
+                                            Console.Clear();
+                                            Console.WriteLine("Invalid input. Please enter a number and try again.");
+                                            Console.WriteLine();
+                                        }
+                                        else if(validInput2 == true && sphinxAnswer < 1 || validInput2 == true && sphinxAnswer > 3)
+                                        {
+                                            Console.Clear();
+                                            Console.WriteLine($"You entered {sphinxAnswer}. Please enter a number between 1 and 3 and try again.");
+                                            Console.WriteLine();
+                                        }
+                                        else if(validInput2 == true && sphinxAnswer > 0 && sphinxAnswer < 4)
+                                        {
+                                            if(sphinxAnswer == 1)
+                                            {
+                                                //Console.Clear();
+                                                bool check = r.CheckAnswer(0, sphinxAnswer);
+                                                if(check == true)
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine("You have chosen wisely!");
+                                                    Console.WriteLine();
+                                                    Console.WriteLine("Press any key to continue...");
+                                                    Console.ReadKey();
+                                                    //////////////////////////////////////////////////////////
+                                                    //TODO: Add the PowerUpOrPenalty(string text) method here and complete the method in the Character class
+                                                    //////////////////////////////////////////////////////////
+                                                    runSphinx = false;
+                                                }
+                                                else
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine("You have chosen poorly!");
+                                                    Console.WriteLine();
+                                                    Console.WriteLine("Press any key to continue...");
+                                                    //////////////////////////////////////////////////////////
+                                                    //TODO: Add the PowerUpOrPenalty(string text) method here and complete the method in the Character class
+                                                    //////////////////////////////////////////////////////////
+                                                    runSphinx = false;
+                                                }
+                                            }
+                                            else if(sphinxAnswer == 2)
+                                            {
+                                                //Console.Clear();
+                                                bool check = r.CheckAnswer(0, sphinxAnswer);
+                                                if(check == true)
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine("You have chosen wisely!");
+                                                    Console.WriteLine();
+                                                    Console.WriteLine("Press any key to continue...");
+                                                    Console.ReadKey();
+                                                    //////////////////////////////////////////////////////////
+                                                    //TODO: Add the PowerUpOrPenalty(string text) method here and complete the method in the Character class
+                                                    //////////////////////////////////////////////////////////
+                                                    runSphinx = false;
+                                                }
+                                                else
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine("You have chosen poorly!");
+                                                    Console.WriteLine();
+                                                    Console.WriteLine("Press any key to continue...");
+                                                    //////////////////////////////////////////////////////////
+                                                    //TODO: Add the PowerUpOrPenalty(string text) method here and complete the method in the Character class
+                                                    //////////////////////////////////////////////////////////
+                                                    runSphinx = false;
+                                                }
+                                            }
+                                            else if(sphinxAnswer == 3)
+                                            {
+                                                //Console.Clear();
+                                                bool check = r.CheckAnswer(0, sphinxAnswer);
+                                                if(check == true)
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine("You have chosen wisely!");
+                                                    Console.WriteLine();
+                                                    Console.WriteLine("Press any key to continue...");
+                                                    Console.ReadKey();
+                                                    //////////////////////////////////////////////////////////
+                                                    //TODO: Add the PowerUpOrPenalty(string text) method here and complete the method in the Character class
+                                                    //////////////////////////////////////////////////////////
+                                                    runSphinx = false;
+                                                }
+                                                else
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine("You have chosen poorly!");
+                                                    Console.WriteLine();
+                                                    Console.WriteLine("Press any key to continue...");
+                                                    //////////////////////////////////////////////////////////
+                                                    //TODO: Add the PowerUpOrPenalty(string text) method here and complete the method in the Character class
+                                                    //////////////////////////////////////////////////////////
+                                                    runSphinx = false;
+                                                }
+                                            }  
+                                        }
+                                    }
                                     sphinxQuestions = false;
                                 }
                                 else if(sphinxSelect == 2)
@@ -410,4 +524,5 @@ public class Quest
         // TODO replace this with a real implementation
         return false;
     }
+
 }
