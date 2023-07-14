@@ -139,5 +139,27 @@ public class Journey
         return check;
     }
 
-    
+    public string GetPowerUpType()
+    {
+        string powerUpType = "";
+        Random random = new Random();
+        int index = random.Next(0, 2);
+        string type = _powerUps[index];
+        index = random.Next(0, 2);
+        int amount = _powerUpAmounts[index];
+        powerUpType = type + "|" + amount;
+        return powerUpType;
+    }
+
+    public string GetPenalty()
+    {
+        string penalty = "";
+        Random random = new Random();
+        int index = random.Next(0, 2);
+        string amount = _powerUpAmounts[index].ToString();
+        penalty = "Penalty|" + amount;
+        return penalty;
+    }
+
+    /////////////////////////////
 }

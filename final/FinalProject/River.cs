@@ -23,6 +23,9 @@ public class River: Journey
         "The sunrises and you pack up your things and get back in the boat. \nYou continue down the river seeing the beautiful scenery. \nYou see a small island in the middle of the river and decide to stop and explore it.",
         "You pull the boat up to the island and get out. \nYou walk around the island and see a small cave. \nYou decide to go into the cave and see what is inside. \nYou walk into the cave and see a small room with a statue of a sphinx. \nYou walk up to the statue and see that it has a message on it covered by a cloth. \nYou pull the cloth off and read the message.", 
         "It says, \nI am the sphinx of the river. \nI will ask you a question. \nIf you answer it correctly you will be rewarded. \nIf you answer it incorrectly you will be punished. \nDo you wish to answer my questions?",
+        "You exit the cave where the sphinx statue was. \nYou get back in the boat and continue down the river. \nYou see off in the distance an old dock. \nYou decide to pull the boat up to the dock and get out.",
+        "You step onto the riverbank, and off in the distance you spot the castle. \nHowever, it is getting dark and you decide to make camp for the night. \nYou find a nice spot and set up camp. You start a fire and cook some food. \nYou eat and then go to sleep.",
+        "The dawn breaks and you are awaken by the sunlight in the distance. \nYou decided to pack up your things and head towards the castle.",
     };
 
     public int GetRiverSphinxQuestions()

@@ -282,6 +282,19 @@ public class Quest
                                 
                                 if(sphinxSelect == 1)
                                 {
+                                    playershield = p1.GetShieldPower();
+                                    playerArmor = p1.GetArmor();
+                                    playerHealth = p1.GetHealth();
+                                    playerAttack = p1.GetWeaponPower();
+
+                                    Console.WriteLine(playershield);
+                                    Console.WriteLine(playerArmor);
+                                    Console.WriteLine(playerHealth);
+                                    Console.WriteLine(playerAttack);
+
+                                    string newstats = p1.HeroStats();
+                                    Console.WriteLine(newstats);
+
                                     Console.Clear();
                                     Console.WriteLine("You have chosen to answer the sphinx's questions.");
                                     Console.WriteLine();
@@ -328,9 +341,12 @@ public class Quest
                                                     Console.WriteLine();
                                                     Console.WriteLine("Press any key to continue...");
                                                     Console.ReadKey();
-                                                    //////////////////////////////////////////////////////////
-                                                    //TODO: Add the PowerUpOrPenalty(string text) method here and complete the method in the Character class
-                                                    //////////////////////////////////////////////////////////
+                                                    
+                                                    Console.Clear();
+                                                    string reward = r.GetPowerUpType();                                                    
+                                                    p1.PowerUpOrPenalty(reward);
+                                                    Console.WriteLine("Press any key to continue...");
+                                                    Console.ReadKey();
                                                     runSphinx = false;
                                                 }
                                                 else
@@ -339,9 +355,17 @@ public class Quest
                                                     Console.WriteLine("You have chosen poorly!");
                                                     Console.WriteLine();
                                                     Console.WriteLine("Press any key to continue...");
-                                                    //////////////////////////////////////////////////////////
-                                                    //TODO: Add the PowerUpOrPenalty(string text) method here and complete the method in the Character class
-                                                    //////////////////////////////////////////////////////////
+                                                    Console.ReadKey();
+
+                                                    string penalty = r.GetPenalty();                                                    
+                                                    p1.PowerUpOrPenalty(penalty);
+
+                                                    Console.Clear();
+                                                    newstats = p1.HeroStats();
+                                                    Console.WriteLine();
+                                                    Console.WriteLine(newstats);
+                                                    Console.WriteLine("Press any key to continue...");
+                                                    Console.ReadKey();
                                                     runSphinx = false;
                                                 }
                                             }
@@ -356,9 +380,16 @@ public class Quest
                                                     Console.WriteLine();
                                                     Console.WriteLine("Press any key to continue...");
                                                     Console.ReadKey();
-                                                    //////////////////////////////////////////////////////////
-                                                    //TODO: Add the PowerUpOrPenalty(string text) method here and complete the method in the Character class
-                                                    //////////////////////////////////////////////////////////
+                                                    
+                                                    Console.Clear();
+                                                    string reward = r.GetPowerUpType();
+                                                    p1.PowerUpOrPenalty(reward);
+                                                    newstats = p1.HeroStats();
+                                                    Console.WriteLine();
+                                                    Console.WriteLine(newstats);
+                                                    Console.WriteLine();
+                                                    Console.WriteLine("Press any key to continue...");
+                                                    Console.ReadKey();
                                                     runSphinx = false;
                                                 }
                                                 else
@@ -367,9 +398,17 @@ public class Quest
                                                     Console.WriteLine("You have chosen poorly!");
                                                     Console.WriteLine();
                                                     Console.WriteLine("Press any key to continue...");
-                                                    //////////////////////////////////////////////////////////
-                                                    //TODO: Add the PowerUpOrPenalty(string text) method here and complete the method in the Character class
-                                                    //////////////////////////////////////////////////////////
+                                                    Console.ReadKey();
+
+                                                    Console.Clear();
+                                                    string penalty = r.GetPenalty();
+                                                    p1.PowerUpOrPenalty(penalty);
+
+                                                    newstats = p1.HeroStats();
+                                                    Console.WriteLine();
+                                                    Console.WriteLine(newstats);
+                                                    Console.WriteLine("Press any key to continue...");
+                                                    Console.ReadKey();
                                                     runSphinx = false;
                                                 }
                                             }
@@ -384,9 +423,12 @@ public class Quest
                                                     Console.WriteLine();
                                                     Console.WriteLine("Press any key to continue...");
                                                     Console.ReadKey();
-                                                    //////////////////////////////////////////////////////////
-                                                    //TODO: Add the PowerUpOrPenalty(string text) method here and complete the method in the Character class
-                                                    //////////////////////////////////////////////////////////
+
+                                                    Console.Clear();                               
+                                                    string reward = r.GetPowerUpType();
+                                                    p1.PowerUpOrPenalty(reward);
+                                                    Console.WriteLine("Press any key to continue...");
+                                                    Console.ReadKey();
                                                     runSphinx = false;
                                                 }
                                                 else
@@ -395,11 +437,20 @@ public class Quest
                                                     Console.WriteLine("You have chosen poorly!");
                                                     Console.WriteLine();
                                                     Console.WriteLine("Press any key to continue...");
-                                                    //////////////////////////////////////////////////////////
-                                                    //TODO: Add the PowerUpOrPenalty(string text) method here and complete the method in the Character class
-                                                    //////////////////////////////////////////////////////////
+                                                    Console.ReadKey();
+
+                                                    string penalty = r.GetPenalty();                                                    
+                                                    p1.PowerUpOrPenalty(penalty);
+
+                                                    newstats = p1.HeroStats();
+                                                    Console.WriteLine();
+                                                    Console.WriteLine(newstats);
+                                                    Console.WriteLine("Press any key to continue...");
+                                                    Console.ReadKey();
+
                                                     runSphinx = false;
                                                 }
+
                                             }  
                                         }
                                     }
@@ -416,7 +467,8 @@ public class Quest
                                 }
                             }
                         }                
-                        
+                        //////////////////////////////////////////////
+                        r.RiverStory(8, 10);
                         break;
                     case 2:
                         Console.Clear();

@@ -99,18 +99,24 @@ public abstract class Character
     {
         if(powerUp == "Health")
         {
+            Console.WriteLine($"You have gained an increase of {amount} points in health!");
+            Console.WriteLine();
             int startingHealth = GetHealth();
             int newHealth = startingHealth + amount;
             SetHealth(newHealth);
         }
         else if(powerUp == "Attack")
         {
+            Console.WriteLine($"You have gained an increase of {amount} points in your attack!");
+            Console.WriteLine();
             int startingAttack = GetWeaponPower();
             int newAttack = startingAttack + amount;
             SetWeaponPower(newAttack);
         }
         else if(powerUp == "Defense")
         {
+            Console.WriteLine($"You have gained an increase of {amount} points in you armor!");
+            Console.WriteLine();
             int startingDefense = GetArmor();
             int newDefense = startingDefense + amount;
             SetArmor(newDefense);
@@ -119,7 +125,10 @@ public abstract class Character
 
     public void HealthPenalty(int number)
     {
-        SetHealth(number);
+        Console.WriteLine($"You have lost {number} points in health!");
+        int startingHealth = GetHealth();
+        int newHealth = startingHealth - number;
+        SetHealth(newHealth);
     }
 
     public void PowerUpOrPenalty(string text)
@@ -130,13 +139,18 @@ public abstract class Character
         string amount = key.Substring(key.IndexOf("|") + 1);
 
         int number = int.Parse(amount);
-
-        Console.WriteLine();
-        Console.WriteLine(type);
-        Console.WriteLine(number);
         //////////////////////////////////
         //TODO: Add conditional to apply power up or penalty
         //////////////////////////////////
+
+        if(type == "Penalty")
+        {
+            HealthPenalty(number);
+        }
+        else
+        {
+            AddPowerUp(type, number);
+        }
     }
 }
 
