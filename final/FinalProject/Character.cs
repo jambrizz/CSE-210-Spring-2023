@@ -72,6 +72,16 @@ public abstract class Character
     {
         return 0;
     }
+
+    public virtual int GetElfBowPower()
+    {
+        return 0;
+    }
+
+    public virtual int GetWizardStaffPower()
+    {
+        return 0;
+    }
     
     public virtual void SetShieldPower(int number)
     {

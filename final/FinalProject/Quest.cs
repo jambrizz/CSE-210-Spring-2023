@@ -498,31 +498,499 @@ public class Quest
                 //Console.WriteLine($"Health: {p.GetHealth()}");
                 //Console.WriteLine($"Armor: {p.GetArmor()}");
                 //Console.WriteLine($"Shield: {p.GetShieldPower()}");
+
+
                 break;
             case 2:
                 Console.Clear();
                 Console.WriteLine("You have selected the Elf as your character.");
-                Elf e = new Elf(2);
-                string stats2 = e.HeroStats();
+                Character e = new Elf(2);
+                string elfStats = e.HeroStats();
                 Console.WriteLine();
-                Console.WriteLine(stats2);
+                Console.WriteLine(elfStats);
+                Console.WriteLine();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
 
-                //Console.WriteLine();
-                //Console.WriteLine($"Health: {e.GetHealth()}");
-                //Console.WriteLine($"Armor: {e.GetArmor()}");
+                DisplayHelper dh2 = new DisplayHelper();
+                dh2.DisplayStartingMessages();
+
+                int elfPath = 0;
+                bool pathSelection2 = false;
+                while(pathSelection2 == false)
+                {
+                    dh2.DisplayTextFile("PathSelection.txt");
+                    Console.Write("Enter your selection: ");
+                    string input = Console.ReadLine();
+                    bool validInput = int.TryParse(input, out int pathSelect);
+
+                    if (validInput == false)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Invalid input. Please enter a number and try again.");
+                        Console.WriteLine();
+                    }
+                    else if(validInput == true && pathSelect < 1 || validInput == true && pathSelect > 3)
+                    {
+                        Console.Clear();
+                        Console.WriteLine($"You entered {pathSelect}. Please enter a number between 1 and 3 and try again.");
+                        Console.WriteLine();
+                    }
+                    else if(validInput == true && pathSelect > 0 && pathSelect < 4)
+                    {
+                        pathSelection2 = true;
+                        elfPath = pathSelect;
+                    }
+                }
+
+                switch(elfPath)
+                {
+                    case 1:
+                        Console.Clear();
+                        Character e1 = new Elf(2);
+                        int playerArmor = e1.GetArmor();
+                        int playerHealth = e1.GetHealth();
+                        int playerAttack = e1.GetWeaponPower();
+                        int playerBow = e1.GetElfBowPower();
+
+                        River r2 = new River();
+                        r2.RiverStory(0, 3);
+
+                        bool riverCombat2 = true;
+                        while(riverCombat2 == true)
+                        {
+                            int enemyHealth = r2.GetRiverBanditsHealth();
+                            int enemyAttack = r2.GetRiverBanditsAttack();
+
+                            Console.Clear();
+                            Console.WriteLine($"Your Stats\nHealth: {playerHealth}\nArmor: {playerArmor}\nBow: {playerBow}");
+                            Console.WriteLine();
+                            Console.WriteLine($"{r2.GetBanditStats()}");
+                            Console.WriteLine();
+                            Console.WriteLine("Press any key to roll the die you must get a 10 or higher to land a hit...");
+                            Console.ReadKey();
+                            int roll = rollDie();
+                            Console.WriteLine($"You rolled a {roll}.");
+
+                            if(roll < 10)
+                            {
+                                Console.WriteLine("You missed!");
+                                Console.WriteLine();
+                                Console.WriteLine("Press any key to continue...");
+                                Console.ReadKey();
+                            }
+                            if(roll >= 10 && roll < 15)
+                            {
+                                int damage = playerAttack / 2;
+                                
+                                if (enemyHealth > damage)
+                                {
+                                    enemyHealth -= damage;
+                                }
+                                else
+                                {
+                                    enemyHealth = 0;
+                                    riverCombat2 = false;
+                                }
+
+                                r2.SetRiverBanditsHealth(enemyHealth);
+                                Console.WriteLine("You landed a glancing blow!");
+                                Console.WriteLine();
+                                Console.WriteLine("Press any key to continue...");
+                                Console.ReadKey();
+                            }
+                            else if(roll >= 15 && roll <= 20)
+                            {
+                                if(playerBow > enemyHealth)
+                                {
+                                    enemyHealth = 0;
+                                    riverCombat2 = false;
+                                }
+                                
+                                r2.SetRiverBanditsHealth(enemyHealth);
+                                Console.WriteLine("You landed a fatal hit!");
+                                Console.WriteLine();
+                                Console.WriteLine("Press any key to continue...");
+                                Console.ReadKey();
+                            }
+
+                            if(enemyHealth > 0)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("The bandit attacks!");
+                                Console.WriteLine();
+                                roll = rollDie();
+
+                                if(roll < 10)
+                                {
+                                    Console.WriteLine("The bandit missed!");
+                                    Console.WriteLine();
+                                    Console.WriteLine("Press any key to continue...");
+                                    Console.ReadKey();
+                                }
+                                else
+                                {
+                                    if(playerArmor > 0)
+                                    {
+                                        playerArmor -= enemyAttack;
+                                        
+                                        if(playerArmor == 0)
+                                        {
+                                            e1.CombatDamage("armor", playerArmor);
+                                        }
+                                        else if(playerArmor < 0)
+                                        {
+                                            playerArmor = 0;
+                                            e1.CombatDamage("armor", 0);
+                                        }
+                                        else 
+                                        {
+                                            e1.CombatDamage("armor", playerArmor);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        playerHealth -= enemyAttack;
+                                        if(playerHealth == 0)
+                                        {
+                                            e1.CombatDamage("health", playerHealth);
+                                            HeroDefeated();
+                                            riverCombat2 = false;
+                                        }
+                                        else if(playerHealth < 0)
+                                        {
+                                            playerHealth = 0;
+                                            e1.CombatDamage("health", playerHealth);
+                                            HeroDefeated();
+                                            riverCombat2 = false;
+                                        }
+                                        else
+                                        {
+                                            e1.CombatDamage("health", playerHealth);
+                                        }
+                                    }
+                                    Console.WriteLine("The bandit landed a hit!");
+                                    Console.WriteLine();
+                                    Console.WriteLine("Press any key to continue...");
+                                    Console.ReadKey();
+                                }
+                            }
+                        }
+
+                        Console.Clear();
+                        Console.WriteLine("You have won!");
+                        Console.WriteLine();
+                        Console.WriteLine($"Your updated Stats are\nHealth: {playerHealth}\nArmor: {playerArmor}\nBow: {playerBow}");
+                        Console.WriteLine();
+                        Console.WriteLine("Press any key to continue the story...");
+                        Console.ReadKey();
+
+                        r2.RiverStory(4, 7);
+
+                        bool sphinxQuestions2 = true;
+                        while(sphinxQuestions2 == true)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Do you wish to answer the sphinx's questions?");
+                            Console.WriteLine("1. Yes");
+                            Console.WriteLine("2. No");
+                            Console.Write("Enter your selection: ");
+                            string input2 = Console.ReadLine();
+                            bool validInput2 = int.TryParse(input2, out int sphinxSelect);
+
+                            if(validInput2 == false)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Invalid input. Please enter a number and try again.");
+                                Console.WriteLine();
+                            }
+                            else if(validInput2 == true && sphinxSelect < 1 || validInput2 == true && sphinxSelect > 2)
+                            {
+                                Console.Clear();
+                                Console.WriteLine($"You entered {sphinxSelect}. Please enter a number between 1 and 2 and try again.");
+                                Console.WriteLine();
+                            }
+                            else if(validInput2 == true && sphinxSelect > 0 && sphinxSelect < 3)
+                            {
+                                if(sphinxSelect == 1)
+                                {
+                                    playerArmor = e1.GetArmor();
+                                    playerHealth = e1.GetHealth();
+                                    playerAttack = e1.GetWeaponPower();
+
+                                    Console.Clear();
+                                    Console.WriteLine("You have chosen to answer the sphinx's questions.");
+                                    Console.WriteLine();
+                                    Console.WriteLine("Press any key to continue...");
+                                    Console.ReadKey();
+
+                                    Random rn = new Random();
+                                    int number = rn.Next(0, 2);
+
+                                    bool runSphinx = true;
+                                    while(runSphinx == true)
+                                    {
+                                        //////////////////////////////////////////////////////
+                                        //TODO: switch out the parameter 0 in the GetSphinxRiddle method with the number variable
+                                        //////////////////////////////////////////////////////
+                                        
+                                        string question = r2.GetSphinxRiddle(0);
+                                        Console.WriteLine(question);
+                                        r2.GetSphinxOptions(0);
+                                        Console.WriteLine();
+                                        Console.Write("Enter your selection: ");
+                                        string sphinxInput2 = Console.ReadLine();
+                                        bool validSphinxInput2 = int.TryParse(sphinxInput2, out int sphinxAnswer2);
+
+                                        if(validSphinxInput2 == false)
+                                        {
+                                            Console.Clear();
+                                            Console.WriteLine("Invalid input. Please enter a number and try again.");
+                                            Console.WriteLine();
+                                        }
+                                        else if(validSphinxInput2 == true && sphinxAnswer2 < 1 || validSphinxInput2 == true && sphinxAnswer2 > 3)
+                                        {
+                                            Console.Clear();
+                                            Console.WriteLine($"You entered {sphinxAnswer2}. Please enter a number between 1 and 3 and try again.");
+                                            Console.WriteLine();
+                                        }
+                                        else if(validSphinxInput2 == true && sphinxAnswer2 >= 1 || validSphinxInput2 == true && sphinxAnswer2 < 4)
+                                        {
+                                            if(sphinxAnswer2 == 1)
+                                            {
+                                                bool check = r2.CheckAnswer(0, sphinxAnswer2);
+                                                if(check == true)
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine("You have chosen wisely!");
+                                                    Console.WriteLine();
+                                                    Console.WriteLine("Press any key to continue...");
+                                                    Console.ReadKey();
+
+                                                    Console.Clear();
+                                                    string reward = r2.GetPowerUpType();
+                                                    e1.PowerUpOrPenalty(reward);
+                                                    elfStats = e1.HeroStats();
+                                                    Console.WriteLine();
+                                                    Console.WriteLine(elfStats);
+                                                    Console.WriteLine();
+                                                    Console.WriteLine("Press any key to continue...");
+                                                    Console.ReadKey();
+                                                    runSphinx = false;
+                                                    sphinxQuestions2 = false;
+                                                }
+                                                else
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine("You have chosen poorly!");
+                                                    Console.WriteLine();
+                                                    Console.WriteLine("Press any key to continue...");
+                                                    Console.ReadKey();
+
+                                                    Console.Clear();
+                                                    string penalty = r2.GetPenalty();
+                                                    e1.PowerUpOrPenalty(penalty);
+                                                    elfStats = e1.HeroStats();
+                                                    Console.WriteLine();
+                                                    Console.WriteLine(elfStats);
+                                                    Console.WriteLine();
+                                                    Console.WriteLine("Press any key to continue...");
+                                                    Console.ReadKey();
+
+                                                    runSphinx = false;
+                                                    sphinxQuestions2 = false;
+                                                }
+                                            }
+                                            else if(sphinxAnswer2 == 2)
+                                            {
+                                                bool check = r2.CheckAnswer(0, sphinxAnswer2);
+                                                if(check == true)
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine("You have chosen wisely!");
+                                                    Console.WriteLine();
+                                                    Console.WriteLine("Press any key to continue...");
+                                                    Console.ReadKey();
+
+                                                    Console.Clear();
+                                                    string reward = r2.GetPowerUpType();
+                                                    e1.PowerUpOrPenalty(reward);
+                                                    elfStats = e1.HeroStats();
+                                                    Console.WriteLine();
+                                                    Console.WriteLine(elfStats);
+                                                    Console.WriteLine();
+                                                    Console.WriteLine("Press any key to continue...");
+                                                    Console.ReadKey();
+                                                    runSphinx = false;
+                                                    sphinxQuestions2 = false;
+                                                }
+                                                else
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine("You have chosen poorly!");
+                                                    Console.WriteLine();
+                                                    Console.WriteLine("Press any key to continue...");
+                                                    Console.ReadKey();
+
+                                                    Console.Clear();
+                                                    string penalty = r2.GetPenalty();
+                                                    e1.PowerUpOrPenalty(penalty);
+                                                    elfStats = e1.HeroStats();
+                                                    Console.WriteLine();
+                                                    Console.WriteLine(elfStats);
+                                                    Console.WriteLine();
+                                                    Console.WriteLine("Press any key to continue...");
+                                                    Console.ReadKey();
+
+                                                    runSphinx = false;
+                                                    sphinxQuestions2 = false;
+                                                }
+                                            }
+                                            else if(sphinxAnswer2 == 3)
+                                            {
+                                                bool check = r2.CheckAnswer(0, sphinxAnswer2);
+                                                if(check == true)
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine("You have chosen wisely!");
+                                                    Console.WriteLine();
+                                                    Console.WriteLine("Press any key to continue...");
+                                                    Console.ReadKey();
+
+                                                    Console.Clear();
+                                                    string reward = r2.GetPowerUpType();
+                                                    e1.PowerUpOrPenalty(reward);
+                                                    elfStats = e1.HeroStats();
+                                                    Console.WriteLine();
+                                                    Console.WriteLine(elfStats);
+                                                    Console.WriteLine();
+                                                    Console.WriteLine("Press any key to continue...");
+                                                    Console.ReadKey();
+                                                    runSphinx = false;
+                                                    sphinxQuestions2 = false;
+                                                }
+                                                else
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine("You have chosen poorly!");
+                                                    Console.WriteLine();
+                                                    Console.WriteLine("Press any key to continue...");
+                                                    Console.ReadKey();
+
+                                                    Console.Clear();
+                                                    string penalty = r2.GetPenalty();
+                                                    e1.PowerUpOrPenalty(penalty);
+                                                    elfStats = e1.HeroStats();
+                                                    Console.WriteLine();
+                                                    Console.WriteLine(elfStats);
+                                                    Console.WriteLine();
+                                                    Console.WriteLine("Press any key to continue...");
+                                                    Console.ReadKey();
+
+                                                    runSphinx = false;
+                                                    sphinxQuestions2 = false;
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                }
+                                else if(sphinxSelect == 2)
+                                {
+                                    Console.Clear();
+                                    Console.WriteLine("You have chosen not to answer the sphinx's questions.");
+                                    Console.WriteLine();
+                                    Console.WriteLine("Press any key to continue...");
+                                    Console.ReadKey();
+                                    sphinxQuestions2 = false;
+                                }
+                            }
+                        }
+                     
+                        r2.RiverStory(8, 10);
+
+                        //////////////////////////////////////////////
+                        //TODO: add the monster section here
+                        //////////////////////////////////////////////
+
+                        break;
+                    case 2:
+                        
+                        break;
+                    case 3:
+                            
+                        break;
+                }
 
                 break;
             case 3:
                 Console.Clear();
                 Console.WriteLine("You have selected the Wizard as your character.");
-                Wizard w = new Wizard(3);
-                string stats3 = w.HeroStats();
+                Character w = new Wizard(3);
+                string wizardStats = w.HeroStats();
                 Console.WriteLine();
-                Console.WriteLine(stats3);
+                Console.WriteLine(wizardStats);
+                Console.WriteLine();
 
-                //Console.WriteLine();
-                //Console.WriteLine($"Health: {w.GetHealth()}");
-                //Console.WriteLine($"Armor: {w.GetArmor()}");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+
+                DisplayHelper dh3 = new DisplayHelper();
+                dh3.DisplayStartingMessages();
+
+                int wizardPath = 0;
+                bool pathSelection3 = false;
+                while(pathSelection3 == false)
+                {
+                    dh3.DisplayTextFile("PathSelection.txt");
+                    Console.Write("Enter your selection: ");
+                    string input = Console.ReadLine();
+                    bool validInput = int.TryParse(input, out int pathSelect);
+
+                    if (validInput == false)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Invalid input. Please enter a number and try again.");
+                        Console.WriteLine();
+                    }
+                    else if(validInput == true && pathSelect < 1 || validInput == true && pathSelect > 3)
+                    {
+                        Console.Clear();
+                        Console.WriteLine($"You entered {pathSelect}. Please enter a number between 1 and 3 and try again.");
+                        Console.WriteLine();
+                    }
+                    else if(validInput == true && pathSelect > 0 && pathSelect < 4)
+                    {
+                        pathSelection3 = true;
+                        wizardPath = pathSelect;
+                    }
+                }
+
+                switch(wizardPath)
+                {
+                    case 1:
+                        Console.Clear();
+                        Console.WriteLine("You have selected the River Path.");
+                        Console.WriteLine();
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey();
+                        break;
+                    case 2:
+                        Console.Clear();
+                        Console.WriteLine("You have selected the Mountain Path.");
+                        Console.WriteLine();
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey();
+                        break;
+                    case 3:
+                        Console.Clear();
+                        Console.WriteLine("You have selected the Forest Path.");
+                        Console.WriteLine();
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey();
+                        break;
+                }
+                
                 break;
         }
     }

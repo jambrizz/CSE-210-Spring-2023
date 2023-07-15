@@ -27,9 +27,9 @@ public class Elf: Character
     {
         _heroType = "Elf";
         _health = 100;
-        _armor = 75;
+        _armor = 80;
         _weaponType = "Goblin Cleaver";
-        _weaponPower = 35;
+        _weaponPower = 30;
     }
 
     public Elf(int health, int armor) : base(health, armor)
@@ -41,6 +41,11 @@ public class Elf: Character
     public Elf() : base()
     {
     
+    }
+
+    public override int GetElfBowPower()
+    {
+        return elfBowPower;
     }
 
     public override string HeroStats()

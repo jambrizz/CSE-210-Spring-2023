@@ -27,14 +27,19 @@ public class Wizard: Character
     {
         _heroType = "Wizard";
         _health = 100;
-        _armor = 50;
+        _armor = 70;
         _weaponType = "Short Sword";
-        _weaponPower = 25;
+        _weaponPower = 20;
     }  
 
     public Wizard() : base()
     {
     
+    }
+
+    public override int GetWizardStaffPower()
+    {
+        return wizardStaffPower;
     }
 
     public override string HeroStats()
