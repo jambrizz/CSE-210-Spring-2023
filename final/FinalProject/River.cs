@@ -5,10 +5,6 @@ using System.Text;
 
 public class River: Journey
 {
-    private int _riverSphinxQuestions = 1;
-
-    private int _riverBandits = 1;
-
     private int _riverBanditsHealth = 25;
 
     private int _riverBanditsAttack = 15;
@@ -28,14 +24,9 @@ public class River: Journey
         "The dawn breaks and you are awaken by the sunlight in the distance. \nYou decided to pack up your things and head towards the castle.",
     };
 
-    public int GetRiverSphinxQuestions()
+    public River()
     {
-        return _riverSphinxQuestions;
-    }
 
-    public void SetRiverSphinxQuestions(int number)
-    {
-        _riverSphinxQuestions = number;
     }
 
     public string GetBanditStats()
@@ -43,30 +34,25 @@ public class River: Journey
         return $"Bandit Stats: \nHealth: {_riverBanditsHealth}\nAttack: {_riverBanditsAttack}";
     }
 
-    public int GetRiverBandits()
-    {
-        return _riverBandits;
-    }
-
     public int GetRiverBanditsHealth()
     {
         return _riverBanditsHealth;
     }
 
-    public void SetRiverBanditsHealth(int health)
+    public void SetDamage(int damage)
+    {
+        SetRiverBanditsHealth(damage);
+    }
+
+    private void SetRiverBanditsHealth(int health)
     {
         _riverBanditsHealth = health;
     }
 
-    public int GetRiverBanditsAttack()
+    public int GetBanditsAttack()
     {
         return _riverBanditsAttack;
-    }   
-
-    public void SetRiverBandits(int number)
-    {
-        _riverBandits = number;
-    }
+    } 
 
     public void RiverStory(int start, int end)
     {

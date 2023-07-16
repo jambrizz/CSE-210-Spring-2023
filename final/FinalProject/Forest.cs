@@ -5,49 +5,47 @@ using System.Text;
 
 public class Forest: Journey
 {
-    private int _forestSphinxQuestions = 2;
+    private int _forestGoblins = 1;
 
-    private int _forestGoblins = 3;
+    private int _forestGoblinHealth = 20;
 
-    private int _forestPathLenght = 3;
+    private int _forestGoblinAttack = 10;
 
     private List<string> _forestStoryLines = new List<string>()
     {
 
     };
 
-    public int GetForestPathLength()
+    public string GetGoblinStats()
     {
-        return _forestPathLenght;
+        return "Goblin Health: " + _forestGoblinHealth + "\nGoblin Attack: " + _forestGoblinAttack;
     }
 
-    public int GetForestSphinxQuestions()
+    public int GetGoblinAttack()
     {
-        return _forestSphinxQuestions;
+        return _forestGoblinAttack;
     }
 
-    public int GetForestGoblins()
+    public int GetGoblinHealth()
     {
-        return _forestGoblins;
+        return _forestGoblinHealth;
     }
 
-    public void SetForestPathLenght(int number)
+    public void SetGoblinHealth(int health)
     {
-        _forestPathLenght = number;
-    }
-
-    public void SetForestSphinxQuestions(int number)
-    {
-        _forestSphinxQuestions = number;
-    }
-
-    public void SetForestGoblins(int number)
-    {
-        _forestGoblins = number;
+        _forestGoblinHealth = health;
     }
 
     public void ForestStory(int start, int end)
     {
-
+        for(int i = start; i < end + 1;)
+        {
+            Console.Clear();
+            Console.WriteLine(_forestStoryLines[i]);
+            Console.WriteLine();
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            i++;
+        }
     }
 }

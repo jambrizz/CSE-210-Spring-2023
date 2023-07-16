@@ -43,7 +43,7 @@ public class Animations
         foreach (string item in _spinnerAnimation)
         {
             Console.Write(item);
-            Thread.Sleep(200);
+            Thread.Sleep(150);
             Console.Write("\b \b");
         }
         Console.WriteLine();

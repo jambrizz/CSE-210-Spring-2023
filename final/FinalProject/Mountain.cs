@@ -5,50 +5,51 @@ using System.Text;
 
 public class Mountain: Journey
 {
-    private int _mountainSphinxQuestions = 2;
+    private int _mountainTrollHealth = 30;
 
-    private int _mountainTrolls = 2;
-
-    private int _mountainPathLenght = 2;
+    private int _mountainTrollAttack = 20;
 
     private List<string> _mountainStoryLines = new List<string>()
     {
 
     };
 
-    public int GetMountainPathLength()
+    public string GetTrollStats()
     {
-        return _mountainPathLenght;
+        return "Troll Health: " + _mountainTrollHealth + "\nTroll Attack: " + _mountainTrollAttack;
     }
 
-    public int GetMountainSphinxQuestions()
+    public int GetTrollHealth()
     {
-        return _mountainSphinxQuestions;
+        return _mountainTrollHealth;
     }
 
-    public int GetMountainTrolls()
+    public int GetTrollAttack()
     {
-        return _mountainTrolls;
+        return _mountainTrollAttack;
     }
 
-    public void SetMountainPathLenght(int number)
+    public void SetTrollHealth(int health)
     {
-        _mountainPathLenght = number;
+        _mountainTrollHealth = health;
     }
 
-    public void SetMountainSphinxQuestions(int number)
+    public void SetMountainTrollHealth(int health)
     {
-        _mountainSphinxQuestions = number;
-    }
-
-    public void SetMountainTrolls(int number)
-    {
-        _mountainTrolls = number;
+        _mountainTrollHealth = health;
     }
 
     public void MountainStory(int start, int end)
     {
-
+        for(int i = start; i < end + 1;)
+        {
+            Console.Clear();
+            Console.WriteLine(_mountainStoryLines[i]);
+            Console.WriteLine();
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            i++;
+        }
     }
 
 }

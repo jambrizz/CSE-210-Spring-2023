@@ -53,18 +53,44 @@ public class Journey
         25
     };
 
-    public string GetSphinxRiddle(int number)
+    public void GetSphinxChallenge(int sphinxNumm)
+    {
+        //Console.WriteLine($"Sphinx Roll {sphinxNumm}");
+        int sphinxNum = 0;
+        if(sphinxNum == 0)
+        {
+            //switch 0 for sphinxNum
+            string riddle = GetSphinxRiddle(0);
+            Console.WriteLine(riddle);
+            Console.WriteLine();
+            Console.WriteLine("Your options:");
+            GetSphinxOptions(0);
+        }
+        else if(sphinxNum == 1)
+        {
+
+        }
+        else if(sphinxNum == 2)
+        {
+
+        }
+        else
+        {
+            Console.WriteLine("Error");
+        }
+    }
+
+    private string GetSphinxRiddle(int number)
     {
         //Console.Clear();
         string riddle = _sphinxRiddles[number];
         return riddle;
     }
 
-    public void GetSphinxOptions(int number)
+    private void GetSphinxOptions(int number)
     {
         if(number == 0)
         {
-            Console.WriteLine();
             int count = 1;
             foreach(string option in _sphinxRiddle1)
             {
@@ -74,7 +100,6 @@ public class Journey
         }
         else if(number == 1)
         {
-            Console.WriteLine();
             int count = 1;
             foreach(string option in _sphinxRiddle2)
             {
@@ -84,7 +109,6 @@ public class Journey
         }
         else if (number == 2)
         {
-            Console.WriteLine();
             int count = 1;
             foreach (string option in _sphinxRiddle3)
             {
@@ -161,5 +185,24 @@ public class Journey
         return penalty;
     }
 
-    /////////////////////////////
+    public int EnemyAttack(int enemyAttack, int rolledNumber)
+    {
+        int damage = 0;
+        if(rolledNumber <10)
+        {
+            Console.WriteLine();
+            Console.WriteLine("The enemy missed!");
+            Console.WriteLine();
+        }
+        else if(rolledNumber >= 10 && rolledNumber <=20)
+        {
+            Console.WriteLine();
+            Console.WriteLine("The enemy landed a hit!");
+            Console.WriteLine();
+            damage = enemyAttack;
+        }
+
+        return damage;
+    }
+
 }

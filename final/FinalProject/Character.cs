@@ -87,22 +87,313 @@ public abstract class Character
     {
         
     }
-    
 
-    public void CombatDamage(string type, int number)
+    public void CombatStats(int hero)
     {
-        if (type == "health")
+        if(hero ==1)
         {
-            SetHealth(number);
+            Console.WriteLine();
+            Console.WriteLine($"Hero Stats: \nHealth: {_health}\nArmor: {_armor}\nShield: {GetShieldPower()}\nWeapon Power: {_weaponPower}");
+            Console.WriteLine();
         }
-        else if (type == "armor")
+        else if(hero == 2)
         {
-            SetArmor(number);
+            Console.WriteLine();
+            Console.WriteLine($"Hero Stats: \nHealth: {_health}\nArmor: {_armor}\nSword Power: {_weaponPower}\nBow Power: {GetElfBowPower()}");
+            Console.WriteLine();
         }
-        else if (type == "shield")
+        else if(hero == 3)
         {
-            SetShieldPower(number);
+            Console.WriteLine();
+            Console.WriteLine($"Hero Stats: \nHealth: {_health}\nArmor: {_armor}\nSword Power: {_weaponPower}\nMagic Power: {GetWizardStaffPower()}");
+            Console.WriteLine();
         }
+    }
+
+    public int combat(int hero, int rolledNumber, int enemyHealth)
+    {
+        Journey j = new Journey();
+        int newEnemyHealth = 0;
+        int attack = GetWeaponPower();
+        if(hero == 1)
+        {
+            if(rolledNumber < 10)
+            {
+                Console.WriteLine();
+                Console.WriteLine("You missed!");
+                Console.WriteLine();
+                newEnemyHealth = enemyHealth;
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+            else if(rolledNumber >= 10 && rolledNumber <15)
+            {
+                Console.WriteLine();
+                Console.WriteLine("You landed a glancing blow!");
+                Console.WriteLine();
+                int damage = attack / 3;
+                if(damage > enemyHealth)
+                {
+                    newEnemyHealth = 0;
+                }
+                else
+                {
+                    newEnemyHealth = enemyHealth - damage;
+                }
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+            else if(rolledNumber >= 15 && rolledNumber <=20)
+            {
+                Console.WriteLine();
+                Console.WriteLine("You landed a critical!");
+                Console.WriteLine();
+                int damage = attack;
+                if(damage > enemyHealth)
+                {
+                    newEnemyHealth = 0;
+                }
+                else
+                {
+                    newEnemyHealth = enemyHealth - damage;
+                }
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+        }
+        else if(hero == 2)
+        {
+            int bowAttack = GetElfBowPower();
+            if(rolledNumber < 10)
+            {
+                Console.WriteLine();
+                Console.WriteLine("You missed!");
+                Console.WriteLine();
+                newEnemyHealth = enemyHealth;
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+            else if(rolledNumber >=10 && rolledNumber < 15)
+            {
+                Console.WriteLine();
+                Console.WriteLine("You landed a glancing blow!");
+                Console.WriteLine();
+                int damage = attack / 2;
+                if(damage > enemyHealth)
+                {
+                    newEnemyHealth = 0;
+                }
+                else
+                {
+                    newEnemyHealth = enemyHealth - damage;
+                }
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+            else if(rolledNumber >=15 && rolledNumber <= 20)
+            {
+                Console.WriteLine();
+                Console.WriteLine("You landed a critical!");
+                Console.WriteLine();
+                int damage = bowAttack;
+                if(damage > enemyHealth)
+                {
+                    newEnemyHealth = 0;
+                }
+                else
+                {
+                    newEnemyHealth = enemyHealth - damage;
+                }
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+        }
+        else if(hero == 3)
+        {
+            int staffAttack = GetWizardStaffPower();
+            if(rolledNumber < 10)
+            {
+                Console.WriteLine();
+                Console.WriteLine("You missed!");
+                Console.WriteLine();
+                newEnemyHealth = enemyHealth;
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+            else if(rolledNumber >= 10 && rolledNumber <15)
+            {
+                Console.WriteLine();
+                Console.WriteLine("You landed a glancing blow!");
+                Console.WriteLine();
+                int damage = (attack / 4) * 3;
+                if(damage > enemyHealth)
+                {
+                    newEnemyHealth = 0;
+                }
+                else
+                {
+                    newEnemyHealth = enemyHealth - damage;
+                }
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+            else if(rolledNumber >= 15 && rolledNumber <=20)
+            {
+                Console.WriteLine();
+                Console.WriteLine("You landed a critical!");
+                Console.WriteLine();
+                int damage = staffAttack;
+                if(damage > enemyHealth)
+                {
+                    newEnemyHealth = 0;
+                }
+                else
+                {
+                    newEnemyHealth = enemyHealth - damage;
+                }
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+        }
+        return newEnemyHealth;
+    }
+    
+    public void CombatDamage(int hero, int attackPower)
+    {
+        int armor = GetArmor();
+        int health = GetHealth();
+
+        if(hero == 1)
+        {
+            int shield = GetShieldPower();
+    
+            int newShield;
+            int newArmor;
+            int newHealth;
+
+            if(shield > 0)
+            {
+                if(attackPower > shield)
+                {
+                    newShield = 0;
+                    SetShieldPower(newShield);
+                }
+                else
+                {
+                    newShield = shield - attackPower;
+                    SetShieldPower(newShield);
+                }
+            }
+            else if(shield == 0 && armor > 0)
+            {
+                if(attackPower > armor)
+                {
+                    newArmor = 0;
+                    SetArmor(newArmor);
+                }
+                else
+                {
+                    newArmor = armor - attackPower;
+                    SetArmor(newArmor);
+                }
+            }
+            else if(shield == 0 && armor == 0 && health >0)
+            {
+                if(attackPower > health)
+                {
+                    newHealth = 0;
+                    SetHealth(newHealth);
+                }
+                else
+                {
+                    newHealth = health - attackPower;
+                    SetHealth(newHealth);
+                }
+            }
+            else if(shield == 0 && armor == 0 && health == 0)
+            {
+                HeroWasDefeated();
+            }
+            else
+            {
+                Console.WriteLine("Error!");
+            }
+        }
+        else if(hero == 2)
+        {
+            if(armor > 0)
+            {
+                if(attackPower > armor)
+                {
+                    int newArmor = 0;
+                    SetArmor(newArmor);
+                }
+                else
+                {
+                    int newArmor = armor - attackPower;
+                    SetArmor(newArmor);
+                }
+            }
+            else if(armor == 0 && health > 0)
+            {
+                if(attackPower > health)
+                {
+                    int newHealth = 0;
+                    SetHealth(newHealth);
+                }
+                else
+                {
+                    int newHealth = health - attackPower;
+                    SetHealth(newHealth);
+                }
+            }
+            else if(armor == 0 && health == 0)
+            {
+                HeroWasDefeated();
+            }
+            else
+            {
+                Console.WriteLine("Error!");
+            }
+        }
+        else if(hero == 3)
+        {
+           if(armor > 0)
+            {
+                if(attackPower > armor)
+                {
+                    int newArmor = 0;
+                    SetArmor(newArmor);
+                }
+                else
+                {
+                    int newArmor = armor - attackPower;
+                    SetArmor(newArmor);
+                }
+            }
+            else if(armor == 0 && health > 0)
+            {
+                if(attackPower > health)
+                {
+                    int newHealth = 0;
+                    SetHealth(newHealth);
+                }
+                else
+                {
+                    int newHealth = health - attackPower;
+                    SetHealth(newHealth);
+                }
+            }
+            else if(armor == 0 && health == 0)
+            {
+                HeroWasDefeated();
+            }
+            else
+            {
+                Console.WriteLine("Error!");
+            } 
+        }
+
     }
 
     public void AddPowerUp(string powerUp, int amount)
@@ -161,6 +452,16 @@ public abstract class Character
         {
             AddPowerUp(type, number);
         }
+    }
+
+    private void HeroWasDefeated()
+    {
+        Console.WriteLine();
+        Console.WriteLine("You have been defeated!");
+        Console.WriteLine();
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey();
+        Environment.Exit(0);
     }
 }
 
