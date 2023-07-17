@@ -110,6 +110,105 @@ public abstract class Character
         }
     }
 
+    public int CombatWithMonster(int numberRolled, int hero)
+    {
+        int damage = 0;
+        if(hero == 1)
+        {
+            if(numberRolled < 5)
+            {
+                hero = 0;
+                Console.WriteLine();
+                Console.WriteLine("You missed!");
+                Console.WriteLine();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+            else if(numberRolled >= 5 && numberRolled < 13)
+            {
+                damage = _weaponPower / 3;
+                Console.WriteLine();
+                Console.WriteLine("You landed a glancing blow!");
+                Console.WriteLine();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+            else if(numberRolled >= 13 && numberRolled <= 20)
+            {
+                damage = _weaponPower;
+                Console.WriteLine();
+                Console.WriteLine("You landed a critical!");
+                Console.WriteLine();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+        }
+        else if(hero == 2)
+        {
+            int elfBow = GetElfBowPower();
+            if(numberRolled <5)
+            {
+                damage = 0;
+                Console.WriteLine();
+                Console.WriteLine("You missed!");
+                Console.WriteLine();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+            else if(numberRolled >= 5 && numberRolled < 13)
+            {
+                damage = _weaponPower;
+                Console.WriteLine();
+                Console.WriteLine("You landed a glancing blow!");
+                Console.WriteLine();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+            else if(numberRolled >= 13 && numberRolled <= 20)
+            {
+                damage = elfBow;
+                Console.WriteLine();
+                Console.WriteLine("You landed a critical!");
+                Console.WriteLine();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+        }
+        else if(hero == 3)
+        {
+            int wizardStaff = GetWizardStaffPower();
+            if(numberRolled < 5)
+            {
+                damage = 0;
+                Console.WriteLine();
+                Console.WriteLine("You missed!");
+                Console.WriteLine();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+            else if(numberRolled >=5 && numberRolled < 13)
+            {
+                damage = _weaponPower;
+                Console.WriteLine();
+                Console.WriteLine("You landed a glancing blow!");
+                Console.WriteLine();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+            else if(numberRolled >= 13 && numberRolled <= 20)
+            {
+                damage = wizardStaff;
+                Console.WriteLine();
+                Console.WriteLine("You landed a critical!");
+                Console.WriteLine();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+        }
+
+        return damage;
+    }
+
     public int combat(int hero, int rolledNumber, int enemyHealth)
     {
         Journey j = new Journey();

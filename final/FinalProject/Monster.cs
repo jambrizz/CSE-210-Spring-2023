@@ -50,28 +50,14 @@ public class Monster
         30
     };
 
-    private List<string> _dragonCombat = new List<string>()
+    private List<string> _monsterStoryLines = new List<string>()
     {
-        "The dragon breathes fire at you!",
-        "The dragon swipes at you with its claws!",
-        "The dragon charges you!",
-        "The dragon swings its tail at you!"
-    };
-
-    private List<string> _ogreCombat = new List<string>()
-    {
-        "The ogre swings its club at you!",
-        "The ogre swings at you!",
-        "The ogre kicks at you!",
-        "The ogre headbutts you!"
-    };
-
-    private List<string> _minautorCombat = new List<string>()
-    {
-        "The minautor swings its axe at you!",
-        "The minautor swipes at you!",
-        "The minautor kicks at you!",
-        "The minautor charges at you!"
+        "You walk up to King's Tower and you notice a hole in the wall that allows you to see inside. \nYou look inside",
+        "You can't make out what the creature, it is too dark to see it clearly but you can tell that it is big.",
+        "You hear a loud roar and you get scare thinking that the creature has seen you.",
+        "You landed a fatal blow on the creature and it falls to the ground. \nYou walk up to the monster and deliver the final blow.",
+        "You start to explorer the tower and see a hidden door to a dungeon under the tower. \nYou enter the dungeon and see a treasure chest in the middle of the room. \nYou open the treasure chest and discover 300 King's Gold Coins. \nYou take the coins and leave the dungeon.",
+        "You leave the King's Tower and start to walk back to the village. \nYou are happy that you were able to defeat the monster and happy that you were able to get the treasure from the dungeon.",
     };
 
     public void SetMonster()
@@ -79,28 +65,96 @@ public class Monster
         Random random = new Random();
         int monsterType = random.Next(0, _monsterTypes.Count);
         
-        //Todo: add if statements to decide monster stats
+        _monsterType = _monsterTypes[monsterType];
+        _monsterHealth = _monsterHealths[monsterType];
+        _monsterWeapon = _monsterWeapons[monsterType];
+        _monsterWeaponPower = _monsterWeaponPowers[monsterType];
+
     }
 
-    public string GetMonsterStats()
+    public string GetMonsterWeapon()
     {
-        return "";
+        return _monsterWeapon;
     }
 
-    public string GetMonsterHealth()
+    public int GetMonsterAttack()
     {
-        return $"Monster Health: {_monsterHealth}";
+        return _monsterWeaponPower;
     }
 
-    public string GetCombatMessage(string monsterType, int number)
+    public int GetMonsterHealth()
     {
-        //TODO: add if statements to decide which list to use
-        //TODO: add function to retrive random message from list
-        return "";
+        return _monsterHealth;
     }
 
-    public void SetMonsterHealth(int number)
+    public string GetMonsterType()
+    {
+        return _monsterType;
+    }
+
+    private void SetMonsterHealth(int number)
     {
         _monsterHealth = number;
     }
+
+    public int MonsterCombat(int rolledNumber)
+    {
+        int damage = 0;
+        if(rolledNumber <10)
+        {
+            damage = 0;
+            Console.Clear();
+            Console.WriteLine("The monster attacks you but misses!");
+            Console.WriteLine();
+            Console.WriteLine("Press enter to continue...");
+            Console.ReadKey();
+        }
+        else if(rolledNumber >=10 || rolledNumber < 15)
+        {
+            damage = GetMonsterAttack() / 2;
+            Console.Clear();
+            Console.WriteLine("The monster attacks you and hits you with a glancing blow!");
+            Console.WriteLine();
+            Console.WriteLine("Press enter to continue...");
+            Console.ReadKey();
+        }
+        else if(rolledNumber >= 15 || rolledNumber <=20)
+        {
+            damage = GetMonsterAttack();
+            Console.Clear();
+            Console.WriteLine("The monster attacks you and lands a critical hit!");
+            Console.WriteLine();
+            Console.WriteLine("Press enter to continue...");
+            Console.ReadKey();
+        }
+
+        return damage;
+    }
+
+    public void SetMonsterDamage(int damage)
+    {
+        int health = GetMonsterHealth();
+        if(damage > health)
+        {
+            SetMonsterHealth(0);
+        }
+        else
+        {
+            SetMonsterHealth(health - damage);
+        }
+    }
+
+    public void MonsterStory(int start, int end)
+    {
+        for(int i = start; i < end + 1;)
+        {
+            Console.Clear();
+            Console.WriteLine(_monsterStoryLines[i]);
+            Console.ReadLine();
+            Console.WriteLine("Press enter to continue");
+            Console.ReadLine();
+            i++;
+        }
+    }
+
 }
