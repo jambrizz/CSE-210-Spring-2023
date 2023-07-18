@@ -5,8 +5,6 @@ using System.Text;
 
 public class Forest: Journey
 {
-    private int _forestGoblins = 1;
-
     private int _forestGoblinHealth = 20;
 
     private int _forestGoblinAttack = 10;

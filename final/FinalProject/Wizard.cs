@@ -9,20 +9,6 @@ public class Wizard: Character
 
     private int wizardStaffPower = 70;
 
-    private List<string> _wizardMessages = new List<string>()
-    {
-        "You jump out of the way!",
-        "You dodge the attack!",
-        "You block the attack!",
-        "You take the hit!",
-        "You take a critical hit!",
-        "You take a glancing blow!",
-        "You landed a critical hit with the Staff of the Magi!",
-        "You landed a glancing blow!",
-        "You landed a solid hit with your Short Sword!",
-        "You missed!"
-    };
-
     public Wizard(int selection) : base(selection)
     {
         _heroType = "Wizard";

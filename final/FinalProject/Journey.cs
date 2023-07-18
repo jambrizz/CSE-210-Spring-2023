@@ -53,10 +53,8 @@ public class Journey
         25
     };
 
-    public void GetSphinxChallenge(int sphinxNumm)
+    public void GetSphinxChallenge(int sphinxNum)
     {
-        //Console.WriteLine($"Sphinx Roll {sphinxNumm}");
-        int sphinxNum = 0;
         if(sphinxNum == 0)
         {
             //switch 0 for sphinxNum
@@ -68,11 +66,19 @@ public class Journey
         }
         else if(sphinxNum == 1)
         {
-
+            string riddle = GetSphinxRiddle(1);
+            Console.WriteLine(riddle);
+            Console.WriteLine();
+            Console.WriteLine("Your options:");
+            GetSphinxOptions(1);
         }
         else if(sphinxNum == 2)
         {
-
+            string riddle = GetSphinxRiddle(2);
+            Console.WriteLine(riddle);
+            Console.WriteLine();
+            Console.WriteLine("Your options:");
+            GetSphinxOptions(2);
         }
         else
         {
@@ -82,7 +88,6 @@ public class Journey
 
     private string GetSphinxRiddle(int number)
     {
-        //Console.Clear();
         string riddle = _sphinxRiddles[number];
         return riddle;
     }
