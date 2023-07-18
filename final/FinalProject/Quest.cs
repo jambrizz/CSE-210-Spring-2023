@@ -1421,7 +1421,9 @@ public class Quest
                                 Console.WriteLine("You decided that it is too risky to enter the tower and decide to head home.");
                                 Console.WriteLine("Press any key to continue...");
                                 Console.ReadKey();
-                                towerStory = false;
+                                Console.WriteLine("Thank you for playing Hero Quest! See you next time!");
+                                Console.WriteLine();
+                                Environment.Exit(0);
                             }
                             else
                             {
@@ -1450,7 +1452,6 @@ public class Quest
                                     Console.WriteLine($"You rolled a {roll}.");
 
                                     int damage = w1.CombatWithMonster(roll, 3);
-                                    Console.WriteLine(damage);
 
                                     if(damage > 0)
                                     {
@@ -1459,11 +1460,10 @@ public class Quest
 
                                     monsterHealth = mon1.GetMonsterHealth();
 
-                                    if(monsterHealth > 0)
+                                    if(monsterHealth == 0)
                                     {
-                                        towerStory = false;
                                         monsterFight = false;
-                                        mon1.MonsterStory(4, 5);
+                                        towerStory = false;
                                     }
                                     else
                                     {
@@ -1481,6 +1481,16 @@ public class Quest
                             }
                         }
                     }
+
+                    Console.Clear();
+                    Console.WriteLine("You have won the fight!");
+                    Console.WriteLine();
+                    w1.CombatStats(3);
+                    Console.WriteLine();
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+
+                    mon1.MonsterStory(3, 5);
                     Environment.Exit(0);
 
                     break;
