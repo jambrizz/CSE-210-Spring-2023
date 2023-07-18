@@ -1660,10 +1660,115 @@ public class Quest
 
                         m3.MountainStory(9, 11);
 
-                        /////////////////////////////////////////////
-                        //TODO: add the monster section here
-                        /////////////////////////////////////////////
+                        Monster mon2 = new Monster();
+                        mon2.MonsterStory(0, 2);
 
+                        bool towerStory2 = true;
+                        while(towerStory2 == true)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Do you enter the tower and fight the monster?");
+                            Console.WriteLine("1. Yes");
+                            Console.WriteLine("2. No");
+                            Console.WriteLine();
+                            Console.Write("Enter your selection: ");
+                            string input = Console.ReadLine();
+                            bool validInput = int.TryParse(input, out int towerSelect);
+
+                            if(validInput == false)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Invalid input. Please enter a number and try again.");
+                                Console.WriteLine();
+                            }
+                            else if(validInput == true && towerSelect <1 || validInput == true && towerSelect >2)
+                            {
+                                Console.Clear();
+                                Console.WriteLine($"You entered {towerSelect}. Please enter a number between 1 and 2 and try again.");
+                                Console.WriteLine();
+                            }
+                            else if(validInput == true && towerSelect >0 || validInput == true && towerSelect <3)
+                            {
+                                if(towerSelect == 2)
+                                {
+                                    Console.Clear();
+                                    Console.WriteLine("You have chosen not to enter the tower.");
+                                    Console.WriteLine();
+                                    Console.WriteLine("You decided that it is too risky to enter the tower and decide to head home.");
+                                    Console.WriteLine();
+                                    Console.WriteLine("Press any key to continue...");
+                                    Console.ReadKey();
+                                    Console.WriteLine();
+                                    Console.WriteLine("Thank you for playing Hero Quest! See you next time!");
+                                    Console.WriteLine();
+                                    Environment.Exit(0);
+                                }
+                                else
+                                {
+                                    Console.Clear();
+                                    mon2.SetMonster();
+                                    bool monsterFight = true;
+                                    while(monsterFight == true)
+                                    {
+                                        Console.Clear();
+                                        mw.CombatStats(3);
+                                        string monsterName = mon2.GetMonsterType();
+                                        int monsterHealth = mon2.GetMonsterHealth();
+                                        int monsterAttack = mon2.GetMonsterAttack();
+                                        string monsterWeapon = mon2.GetMonsterWeapon();
+                                        Console.WriteLine($"{monsterName} Stats:\nHealth: {monsterHealth}\nWeapon: {monsterWeapon}\nAttack: {monsterAttack}");
+
+                                        Console.WriteLine();
+                                        Console.WriteLine("You must roll a 5 or higher to land a hit...");
+                                        Console.WriteLine();
+                                        Console.WriteLine("Press any key to roll the 20 sided die...");
+                                        Console.ReadKey();
+                                        int roll = rollDie();
+                                        Console.WriteLine($"You rolled a {roll}.");
+
+                                        int damage = mw.CombatWithMonster(roll, 3);
+
+                                        if(damage > 0)
+                                        {
+                                            mon2.SetMonsterDamage(damage);
+                                        }
+
+                                        monsterHealth = mon2.GetMonsterHealth();
+
+                                        if(monsterHealth == 0)
+                                        {
+                                            monsterFight = false;
+                                            towerStory2 = false;
+                                        }
+                                        else
+                                        {
+                                            roll = rollDie();
+                                            int monsterStrike = mon2.MonsterCombat(roll);
+                                            Console.WriteLine();
+
+                                            if(monsterStrike > 0)
+                                            {
+                                                mw.CombatDamage(3, monsterStrike);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                        Console.Clear();
+                        Console.WriteLine("You have won the fight!");
+                        Console.WriteLine();
+                        mw.CombatStats(3);
+                        Console.WriteLine();
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey();
+
+                        mon2.MonsterStory(3, 5);
+                        Console.WriteLine();
+                        Console.WriteLine("Thank you for playing Hero Quest! See you next time!");
+                        Console.WriteLine();
+                        Environment.Exit(0);
 
                         break;
                     //Forest Path
@@ -1825,10 +1930,114 @@ public class Quest
 
                         f3.ForestStory(19, 21);
 
+                        Monster mon3 = new Monster();
+                        mon3.MonsterStory(0, 2);
 
-                        /////////////////////////////////////////
-                        //TODO: add the monster section here
-                        /////////////////////////////////////////   
+                        bool towerStory3 = true;
+                        while(towerStory3 == true)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Do you enter the tower and fight the monster?");
+                            Console.WriteLine("1. Yes");
+                            Console.WriteLine("2. No");
+                            Console.WriteLine();
+                            Console.Write("Enter your selection: ");
+                            string input = Console.ReadLine();
+                            bool validInput = int.TryParse(input, out int towerSelect);
+
+                            if(validInput == false)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Invalid input. Please enter a number and try again.");
+                                Console.WriteLine();
+                            }
+                            else if(validInput == true && towerSelect <1 || validInput == true && towerSelect >2)
+                            {
+                                Console.Clear();
+                                Console.WriteLine($"You entered {towerSelect}. Please enter a number between 1 and 2 and try again.");
+                                Console.WriteLine();
+                            }
+                            else if(validInput == true && towerSelect > 0 || validInput == true && towerSelect < 3)
+                            {
+                                if(towerSelect == 2)
+                                {
+                                    Console.Clear();
+                                    Console.WriteLine("You have chosen not to enter the tower.");
+                                    Console.WriteLine();
+                                    Console.WriteLine("You decided that it is too risky to enter the tower and decide to head home.");
+                                    Console.WriteLine("Press any key to continue...");
+                                    Console.ReadKey();
+                                    Console.WriteLine();
+                                    Console.WriteLine("Thank you for playing Hero Quest! See you next time!");
+                                    Console.WriteLine();
+                                    Environment.Exit(0);
+                                }
+                                else
+                                {
+                                    Console.Clear();
+                                    mon3.SetMonster();
+                                    bool monsterFight = true;
+                                    while(monsterFight == true)
+                                    {
+                                        Console.Clear();
+                                        fw.CombatStats(3);
+                                        string monsterName = mon3.GetMonsterType();
+                                        int monsterHealth = mon3.GetMonsterHealth();
+                                        int monsterAttack = mon3.GetMonsterAttack();
+                                        string monsterWeapon = mon3.GetMonsterWeapon();
+                                        Console.WriteLine($"{monsterName} Stats:\nHealth: {monsterHealth}\nWeapon: {monsterWeapon}\nAttack: {monsterAttack}");
+
+                                        Console.WriteLine();
+                                        Console.WriteLine("You must roll a 5 or higher to land a hit...");
+                                        Console.WriteLine();
+                                        Console.WriteLine("Press any key to roll the 20 sided die...");
+                                        Console.ReadKey();
+                                        int roll = rollDie();
+                                        Console.WriteLine($"You rolled a {roll}.");
+
+                                        int damage = fw.CombatWithMonster(roll, 3);
+
+                                        if(damage > 0)
+                                        {
+                                            mon3.SetMonsterDamage(damage);
+                                        }
+
+                                        monsterHealth = mon3.GetMonsterHealth();
+
+                                        if(monsterHealth == 0)
+                                        {
+                                            monsterFight = false;
+                                            towerStory3 = false;
+                                        }
+                                        else
+                                        {
+                                            roll = rollDie();
+                                            int monsterStrike = mon3.MonsterCombat(roll);
+                                            Console.WriteLine();
+
+                                            if(monsterStrike >0)
+                                            {
+                                                fw.CombatDamage(3, monsterStrike);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        Console.Clear();
+                        Console.WriteLine("You have won the fight!");
+                        Console.WriteLine();
+                        fw.CombatStats(3);
+                        Console.WriteLine();
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey();
+
+                        mon3.MonsterStory(3, 5);
+                        Console.WriteLine();
+                        Console.WriteLine("Thank you for playing Hero Quest! See you next time!");
+                        Console.WriteLine();
+                        Environment.Exit(0);
+                        
                         break;
                 }
                     break;

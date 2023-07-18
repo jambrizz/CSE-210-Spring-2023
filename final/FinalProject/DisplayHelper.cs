@@ -27,6 +27,7 @@ public class DisplayHelper
     public void DisplayTitle()
     {
         Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Blue;
         string filename = "title.txt";
         string[] lines = File.ReadAllLines(filename);
         foreach (string line in lines)
