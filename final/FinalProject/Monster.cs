@@ -103,7 +103,7 @@ public class Monster
         if(rolledNumber <10)
         {
             damage = 0;
-            Console.Clear();
+            Console.WriteLine();
             Console.WriteLine("The monster attacks you but misses!");
             Console.WriteLine();
             Console.WriteLine("Press enter to continue...");
@@ -112,7 +112,7 @@ public class Monster
         else if(rolledNumber >=10 || rolledNumber < 15)
         {
             damage = GetMonsterAttack() / 2;
-            Console.Clear();
+            Console.WriteLine();
             Console.WriteLine("The monster attacks you and hits you with a glancing blow!");
             Console.WriteLine();
             Console.WriteLine("Press enter to continue...");
@@ -121,7 +121,7 @@ public class Monster
         else if(rolledNumber >= 15 || rolledNumber <=20)
         {
             damage = GetMonsterAttack();
-            Console.Clear();
+            Console.WriteLine();
             Console.WriteLine("The monster attacks you and lands a critical hit!");
             Console.WriteLine();
             Console.WriteLine("Press enter to continue...");
@@ -150,9 +150,9 @@ public class Monster
         {
             Console.Clear();
             Console.WriteLine(_monsterStoryLines[i]);
-            Console.ReadLine();
-            Console.WriteLine("Press enter to continue");
-            Console.ReadLine();
+            Console.WriteLine();
+            Console.WriteLine("Press enter to continue...");
+            Console.ReadKey();
             i++;
         }
     }

@@ -1421,6 +1421,7 @@ public class Quest
                                 Console.WriteLine("You decided that it is too risky to enter the tower and decide to head home.");
                                 Console.WriteLine("Press any key to continue...");
                                 Console.ReadKey();
+                                Console.WriteLine();
                                 Console.WriteLine("Thank you for playing Hero Quest! See you next time!");
                                 Console.WriteLine();
                                 Environment.Exit(0);
@@ -1433,6 +1434,7 @@ public class Quest
                                 bool monsterFight = true;
                                 while(monsterFight == true)
                                 {
+                                    Console.Clear();
                                     w1.CombatStats(3);
                                     string monsterName = mon1.GetMonsterType();
                                     int monsterHealth = mon1.GetMonsterHealth();
@@ -1445,9 +1447,6 @@ public class Quest
                                     Console.WriteLine();
                                     Console.WriteLine("Press any key to roll the 20 sided die...");
                                     Console.ReadKey();
-                                    ///////////////////////////////////////////////////////////////////////////////////////
-                                    //TODO: their is a bug that does goes straight to the monster is defeated even if you miss
-                                    ///////////////////////////////////////////////////////////////////////////////////////
                                     int roll = rollDie();
                                     Console.WriteLine($"You rolled a {roll}.");
 
@@ -1491,6 +1490,9 @@ public class Quest
                     Console.ReadKey();
 
                     mon1.MonsterStory(3, 5);
+                    Console.WriteLine();
+                    Console.WriteLine("Thank you for playing Hero Quest! See you next time!");
+                    Console.WriteLine();
                     Environment.Exit(0);
 
                     break;
